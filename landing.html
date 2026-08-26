@@ -10,57 +10,174 @@
     <link rel="stylesheet" href="css/landing.css">
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col justify-between">
-    
+
+    <!-- NAVBAR -->
     <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 py-3 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
             <div class="flex items-center space-x-3 cursor-pointer" onclick="window.location.href='landing.html'">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center shadow-md shadow-teal-500/20">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center">
                     <i data-lucide="shield" class="w-5 h-5 text-white"></i>
                 </div>
                 <div>
                     <span class="text-xl font-bold tracking-tight text-slate-900 flex items-center gap-2">
-                        AURA <span class="text-[10px] px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-600 border border-teal-500/30 font-medium">SIH 26186</span>
+                        AURA <span class="text-[10px] px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-700 font-semibold">SIH26186</span>
                     </span>
-                    <p class="text-[11px] text-slate-500 font-medium">Personnel Welfare Intelligence</p>
+                    <p class="text-xs text-slate-500 -mt-0.5">Personnel Welfare Intelligence</p>
                 </div>
             </div>
-            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
-                <a href="landing.html" class="text-teal-600">Platform</a>
-                <a href="pages/personnel-dashboard.html" class="text-slate-600 hover:text-slate-900">Personnel Portal</a>
-                <a href="pages/welfare-dashboard.html" class="text-slate-600 hover:text-slate-900">Welfare Officer</a>
-                <a href="pages/commander-dashboard.html" class="text-slate-600 hover:text-slate-900">Commander View</a>
+
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600">
+                <a href="#platform" class="text-teal-600 hover:text-teal-700 transition">Platform</a>
+                <a href="pages/personnel.html" class="hover:text-teal-600 transition">Personnel Portal</a>
+                <a href="pages/welfare.html" class="hover:text-teal-600 transition">Welfare Officer</a>
+                <a href="pages/commander.html" class="hover:text-teal-600 transition">Commander View</a>
             </nav>
-            <div>
-                <a href="pages/welfare-dashboard.html" class="btn-primary text-sm flex items-center gap-1.5">
-                    Launch Demo <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </a>
-            </div>
+
+            <button onclick="window.location.href='pages/welfare.html'" class="bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold px-5 py-2.5 rounded-full flex items-center gap-2 transition shadow-sm">
+                Launch Demo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
         </div>
     </header>
 
-    <main class="flex-grow">
-        <section class="hero-gradient py-24 px-4 sm:px-6 lg:px-8 text-center max-w-4xl mx-auto space-y-6">
-            <div class="feature-badge">
-                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Ministry of Home Affairs • CRPF Division
-            </div>
-            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.1]">
-                Supporting those who protect us.
-            </h1>
-            <p class="text-lg text-slate-600 max-w-2xl mx-auto">
-                AI-powered welfare intelligence for uniformed forces — enabling early support, healthier teams, and stronger operational resilience.
-            </p>
-            <div class="flex justify-center gap-4 pt-4">
-                <a href="pages/welfare-dashboard.html" class="btn-primary">Explore Officer Dashboard</a>
-                <a href="pages/personnel-dashboard.html" class="bg-white border border-slate-300 font-semibold text-slate-700 px-6 py-3 rounded-xl text-sm hover:bg-slate-100 transition-all">Personnel Portal</a>
-            </div>
-        </section>
-    </main>
+    <!-- HERO -->
+    <section id="platform" class="max-w-5xl mx-auto text-center px-4 sm:px-6 pt-20 pb-16">
+        <div class="inline-flex items-center gap-2 bg-teal-500/10 text-teal-700 text-sm font-semibold px-4 py-2 rounded-full mb-8">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            Ministry of Home Affairs • CRPF Division
+        </div>
+        <h1 class="text-5xl sm:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.1] mb-6">
+            Supporting those who<br class="hidden sm:block"> protect us.
+        </h1>
+        <p class="text-lg text-slate-600 max-w-2xl mx-auto mb-10">
+            AI-powered welfare intelligence for uniformed forces — enabling early support,
+            healthier teams, and stronger operational resilience.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button onclick="window.location.href='pages/welfare.html'" class="bg-teal-600 hover:bg-teal-700 text-white font-semibold px-8 py-3.5 rounded-full transition shadow-sm w-full sm:w-auto">
+                Explore Officer Dashboard
+            </button>
+            <button onclick="window.location.href='pages/personnel.html'" class="bg-white hover:bg-slate-50 text-slate-900 font-semibold px-8 py-3.5 rounded-full border border-slate-300 transition w-full sm:w-auto">
+                Personnel Portal
+            </button>
+        </div>
+    </section>
 
-    <footer class="bg-white border-t border-slate-200 py-8 text-center text-xs text-slate-500">
-        <p class="font-bold text-slate-800">AURA • Personnel Welfare Intelligence</p>
-        <p class="mt-1">SIH 2026 • Problem Statement SIH26186 • Ministry of Home Affairs</p>
+    <!-- PROBLEM SECTION -->
+    <section id="problem" class="bg-white border-y border-slate-200 py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-teal-600 font-semibold text-sm uppercase tracking-wide">The Problem</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">
+                    Warning signs are missed until it's too late
+                </h2>
+                <p class="text-slate-600 mt-4">
+                    Uniformed personnel face relentless duty hours, night shifts, and high-stress operations —
+                    yet welfare checks remain manual, infrequent, and reactive.
+                </p>
+            </div>
+            <div class="grid sm:grid-cols-3 gap-6">
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200">
+                    <i data-lucide="clock" class="w-6 h-6 text-teal-600 mb-3"></i>
+                    <h3 class="font-bold text-slate-900 mb-1">Reactive, not proactive</h3>
+                    <p class="text-sm text-slate-600">Checks happen after burnout is visible, not before.</p>
+                </div>
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200">
+                    <i data-lucide="file-question" class="w-6 h-6 text-teal-600 mb-3"></i>
+                    <h3 class="font-bold text-slate-900 mb-1">No unified signal</h3>
+                    <p class="text-sm text-slate-600">Duty rosters, leave patterns, and self-reports live in silos.</p>
+                </div>
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200">
+                    <i data-lucide="users" class="w-6 h-6 text-teal-600 mb-3"></i>
+                    <h3 class="font-bold text-slate-900 mb-1">Stretched welfare staff</h3>
+                    <p class="text-sm text-slate-600">Too few officers to manually track every individual's wellbeing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-teal-600 font-semibold text-sm uppercase tracking-wide">How AURA Helps</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">
+                    Early intelligence, built for trust
+                </h2>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-6 rounded-2xl border border-slate-200 hover:shadow-md transition">
+                    <div class="w-11 h-11 rounded-xl bg-teal-500/10 flex items-center justify-center mb-4">
+                        <i data-lucide="activity" class="w-5 h-5 text-teal-600"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-1">Risk-Tier Prediction</h3>
+                    <p class="text-sm text-slate-600">Duty patterns and check-ins fused into watch / concern / urgent flags.</p>
+                </div>
+                <div class="p-6 rounded-2xl border border-slate-200 hover:shadow-md transition">
+                    <div class="w-11 h-11 rounded-xl bg-teal-500/10 flex items-center justify-center mb-4">
+                        <i data-lucide="eye" class="w-5 h-5 text-teal-600"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-1">Explainable Alerts</h3>
+                    <p class="text-sm text-slate-600">Every flag shows exactly why — no black-box scores.</p>
+                </div>
+                <div class="p-6 rounded-2xl border border-slate-200 hover:shadow-md transition">
+                    <div class="w-11 h-11 rounded-xl bg-teal-500/10 flex items-center justify-center mb-4">
+                        <i data-lucide="lock" class="w-5 h-5 text-teal-600"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-1">Privacy-First Design</h3>
+                    <p class="text-sm text-slate-600">Individual flags stay with welfare officers; command sees only aggregates.</p>
+                </div>
+                <div class="p-6 rounded-2xl border border-slate-200 hover:shadow-md transition">
+                    <div class="w-11 h-11 rounded-xl bg-teal-500/10 flex items-center justify-center mb-4">
+                        <i data-lucide="layout-dashboard" class="w-5 h-5 text-teal-600"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-900 mb-1">Officer Dashboard</h3>
+                    <p class="text-sm text-slate-600">Unit-level view for faster, better-informed welfare decisions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRIVACY -->
+    <section id="privacy" class="bg-slate-900 text-white py-20">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+            <div class="w-14 h-14 rounded-2xl bg-teal-500/20 flex items-center justify-center mx-auto mb-6">
+                <i data-lucide="shield-check" class="w-7 h-7 text-teal-400"></i>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold mb-4">Built on trust, not surveillance</h2>
+            <p class="text-slate-300 max-w-2xl mx-auto mb-10">
+                AURA is designed so personnel never fear being watched. Individual-level insights are visible only
+                to welfare officers, while commanders see anonymized, unit-level trends — never a single person's data.
+            </p>
+            <div class="grid sm:grid-cols-3 gap-6 text-left">
+                <div class="bg-white/5 rounded-2xl p-6 border border-white/10">
+                    <h3 class="font-bold mb-1">Aggregated at command level</h3>
+                    <p class="text-sm text-slate-400">Unit dashboards show trends, never names.</p>
+                </div>
+                <div class="bg-white/5 rounded-2xl p-6 border border-white/10">
+                    <h3 class="font-bold mb-1">Individual flags stay protected</h3>
+                    <p class="text-sm text-slate-400">Only welfare officers see personnel-level alerts.</p>
+                </div>
+                <div class="bg-white/5 rounded-2xl p-6 border border-white/10">
+                    <h3 class="font-bold mb-1">Consent-driven data use</h3>
+                    <p class="text-sm text-slate-400">Personnel know what's collected and why.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-10 text-center">
+        <p class="font-bold text-slate-900">AURA • Personnel Welfare Intelligence</p>
+        <p class="text-sm text-slate-500 mt-1">SIH 2026 • Problem Statement SIH26186 • Ministry of Home Affairs</p>
+        <div class="flex items-center justify-center gap-6 mt-4 text-sm text-slate-500">
+            <a href="#privacy" class="hover:text-teal-600 transition">Privacy</a>
+            <a href="pages/personnel.html" class="hover:text-teal-600 transition">Personnel Portal</a>
+            <a href="pages/welfare.html" class="hover:text-teal-600 transition">Welfare Officer</a>
+        </div>
     </footer>
 
-    <script src="../js/app.js"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
