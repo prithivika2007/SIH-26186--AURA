@@ -23,15 +23,15 @@
             50% { transform: translateY(-10px); }
         }
         @keyframes pulseRing {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(13, 148, 136, 0.4); }
-            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(13, 148, 136, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(13, 148, 136, 0); }
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
         }
 
         .animate-fade-down { animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .animate-fade-up { animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .animate-float { animation: floatMotion 4s ease-in-out infinite; }
-        .pulse-badge { animation: pulseRing 2.5s infinite; }
+        .sos-pulse { animation: pulseRing 2s infinite; }
 
         .glass-card {
             background: rgba(255, 255, 255, 0.9);
@@ -48,11 +48,10 @@
 </head>
 <body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col justify-between selection:bg-teal-500 selection:text-white overflow-x-hidden">
 
-    <!-- TOP NAVBAR -->
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 py-3.5 shadow-sm animate-fade-down">
+    <!-- TOP NAVBAR WITH SOS BUTTON -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200 py-3.5 shadow-sm animate-fade-down">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
             <div class="flex items-center space-x-3 cursor-pointer group" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-                <!-- Peace & Calm Wellness Icon (Lotus / Flower) -->
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-emerald-600 flex items-center justify-center shadow-md shadow-teal-500/20 group-hover:scale-110 transition duration-300 text-white">
                     <i data-lucide="flower" class="w-5 h-5"></i>
                 </div>
@@ -72,6 +71,11 @@
             </nav>
 
             <div class="flex items-center gap-3">
+                <!-- EMERGENCY SOS BUTTON -->
+                <button onclick="openLandingSosModal()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs font-extrabold px-4 py-2.5 rounded-xl flex items-center gap-2 transition-all duration-300 shadow-md shadow-rose-600/30 sos-pulse cursor-pointer hover:scale-105 active:scale-95">
+                    <i data-lucide="alert-triangle" class="w-4 h-4"></i> EMERGENCY SOS
+                </button>
+
                 <a href="pages/welfare-dashboard.html" class="bg-teal-600 hover:bg-teal-700 text-white text-sm font-bold px-5 py-2.5 rounded-xl flex items-center gap-2 transition-all duration-300 shadow-md shadow-teal-600/20 hover:scale-105 active:scale-95">
                     <span>Officer Portal</span> <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </a>
@@ -108,7 +112,7 @@
                 </div>
             </div>
 
-            <!-- Right Visual Image Column with Local Soldiers Image -->
+            <!-- Right Visual Image Column -->
             <div class="lg:col-span-5 relative animate-fade-up" style="animation-delay: 0.2s;">
                 <div class="relative mx-auto max-w-md lg:max-w-none animate-float">
                     <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-200">
@@ -156,7 +160,7 @@
                             For individual jawans and officers. Track personal wellness scores, review recovery suggestions, and speak naturally with AURA Live.
                         </p>
                         <ul class="space-y-2.5 text-sm text-slate-700 mb-8">
-                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-teal-600"></i> Daily 1-click check-in</li>
+                            <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-teal-600"></i> Daily 1-click check-in & Emergency SOS</li>
                             <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-teal-600"></i> AURA Live voice companion</li>
                             <li class="flex items-center gap-2"><i data-lucide="check" class="w-4 h-4 text-teal-600"></i> Personal recovery timeline</li>
                         </ul>
@@ -225,98 +229,98 @@
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Warning signs are missed until it's too late</h2>
                 <p class="text-slate-600 mt-3 text-base">Uniformed personnel face relentless duty hours and night shifts — yet current welfare mechanisms remain manual and reactive.</p>
             </div>
+            
             <div class="grid sm:grid-cols-3 gap-6">
-                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 hover:shadow-lg transition duration-300 hover:-translate-y-1">
-                    <div class="w-10 h-10 rounded-xl bg-rose-100 flex items-center justify-center text-rose-600 mb-4">
-                        <i data-lucide="clock" class="w-5 h-5"></i>
+                <div onclick="expandChallenge(1)" class="group bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:border-teal-500 hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-rose-100 flex items-center justify-center text-rose-600 mb-4 font-bold text-xl group-hover:scale-110 transition">⏳</div>
+                        <h3 class="font-bold text-slate-900 mb-2 text-lg">Reactive, Not Proactive</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">Interventions typically happen after burnout or fatigue becomes visible on duty, rather than preventing it beforehand.</p>
                     </div>
-                    <h3 class="font-bold text-slate-900 mb-2 text-lg">Reactive, Not Proactive</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Interventions typically happen after burnout or fatigue becomes visible on duty, rather than preventing it beforehand.</p>
+                    <div class="pt-6 flex items-center gap-2 text-xs font-bold text-teal-600 group-hover:translate-x-1 transition"><span>Click for deep-dive analysis</span> →</div>
                 </div>
-                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 hover:shadow-lg transition duration-300 hover:-translate-y-1">
-                    <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 mb-4">
-                        <i data-lucide="file-question" class="w-5 h-5"></i>
+
+                <div onclick="expandChallenge(2)" class="group bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:border-teal-500 hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 mb-4 font-bold text-xl group-hover:scale-110 transition">📊</div>
+                        <h3 class="font-bold text-slate-900 mb-2 text-lg">Fragmented Signals</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">Duty rosters, leave utilization records, and personal wellbeing check-ins live in complete organizational silos.</p>
                     </div>
-                    <h3 class="font-bold text-slate-900 mb-2 text-lg">Fragmented Signals</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">Duty rosters, leave utilization records, and personal wellbeing check-ins live in complete organizational silos.</p>
+                    <div class="pt-6 flex items-center gap-2 text-xs font-bold text-teal-600 group-hover:translate-x-1 transition"><span>Click for silo breakdown</span> →</div>
                 </div>
-                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200 hover:shadow-lg transition duration-300 hover:-translate-y-1">
-                    <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 mb-4">
-                        <i data-lucide="users" class="w-5 h-5"></i>
+
+                <div onclick="expandChallenge(3)" class="group bg-slate-50 rounded-2xl p-8 border border-slate-200 hover:border-teal-500 hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600 mb-4 font-bold text-xl group-hover:scale-110 transition">👥</div>
+                        <h3 class="font-bold text-slate-900 mb-2 text-lg">Stretched Welfare Staff</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">A very limited number of welfare officers are expected to manually monitor and support hundreds of active personnel.</p>
                     </div>
-                    <h3 class="font-bold text-slate-900 mb-2 text-lg">Stretched Welfare Staff</h3>
-                    <p class="text-sm text-slate-600 leading-relaxed">A very limited number of welfare officers are expected to manually monitor and support hundreds of active personnel.</p>
+                    <div class="pt-6 flex items-center gap-2 text-xs font-bold text-teal-600 group-hover:translate-x-1 transition"><span>Click for staff ratio stats</span> →</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- KEY FEATURES GRID -->
-    <section id="features" class="py-24 bg-slate-50 border-t border-slate-200">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6">
-            <div class="text-center max-w-2xl mx-auto mb-16">
-                <span class="text-teal-700 font-mono text-xs uppercase tracking-widest bg-teal-50 px-3 py-1 rounded-md border border-teal-200 font-bold">Unique Capabilities</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3">Engineered for Operational Excellence</h2>
+    <!-- LIVE EMERGENCY SOS SIMULATOR MODAL WITH DUMMY ADDRESS & HOSPITAL CALL DISPATCH -->
+    <div id="landing-sos-modal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-white text-slate-900 max-w-lg w-full p-8 rounded-3xl shadow-2xl space-y-6 border-4 border-rose-600 animate-fade-down">
+            <div class="text-center space-y-2">
+                <div class="w-16 h-16 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center mx-auto text-2xl font-bold animate-bounce">
+                    🚨
+                </div>
+                <h3 class="text-2xl font-black text-slate-900">EMERGENCY SOS DISPATCH ACTIVE</h3>
+                <p class="text-xs text-slate-600">Instant field telemetry and nearby medical facility routing.</p>
             </div>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white rounded-2xl p-6 border border-slate-200 hover:shadow-lg transition duration-300 hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 mb-4">
-                        <i data-lucide="cpu" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-900 mb-2">Explainable AI Risk Tiers</h3>
-                    <p class="text-sm text-slate-600">No black-box scores. Every flag outlines exact reasons like consecutive night shifts and missed check-ins.</p>
-                </div>
-                <div class="bg-white rounded-2xl p-6 border border-slate-200 hover:shadow-lg transition duration-300 hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 mb-4">
-                        <i data-lucide="sliders" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-900 mb-2">DutyFair AI Balancer</h3>
-                    <p class="text-sm text-slate-600">Dynamically rebalances patrol and duty loads across team members to prevent localized burnout hot spots.</p>
-                </div>
-                <div class="bg-white rounded-2xl p-6 border border-slate-200 hover:shadow-lg transition duration-300 hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 mb-4">
-                        <i data-lucide="mic" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-900 mb-2">AURA Live Voice Companion</h3>
-                    <p class="text-sm text-slate-600">Natural voice interaction enabling personnel to express stress and receive immediate coping guidance.</p>
-                </div>
-                <div class="bg-white rounded-2xl p-6 border border-slate-200 hover:shadow-lg transition duration-300 hover:-translate-y-1">
-                    <div class="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center text-teal-600 mb-4">
-                        <i data-lucide="trending-up" class="w-6 h-6"></i>
-                    </div>
-                    <h3 class="font-bold text-slate-900 mb-2">Resilience Forecasting</h3>
-                    <p class="text-sm text-slate-600">Predictive 7-day unit readiness trends that help commanders adjust rest windows ahead of operations.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- PRIVACY SHIELD SECTION -->
-    <section id="privacy" class="py-24 bg-slate-900 text-white border-t border-slate-800">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
-            <div class="w-16 h-16 rounded-2xl bg-teal-500/20 border border-teal-500/30 flex items-center justify-center mx-auto mb-6 text-teal-400 animate-bounce">
-                <i data-lucide="shield-check" class="w-8 h-8"></i>
+            <!-- DUMMY FIELD ADDRESS & HOSPITAL DETAILS -->
+            <div class="bg-rose-50 border border-rose-200 p-4 rounded-2xl space-y-3 text-xs text-rose-950 font-medium">
+                <div class="flex items-start gap-2.5">
+                    <i data-lucide="map-pin" class="w-4 h-4 text-rose-600 shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="block text-rose-900">Transmitting Dummy Field Address:</strong>
+                        <span>Sector 4, Checkpoint Alpha • Grid 44B (Jammu Operational Zone)</span>
+                    </div>
+                </div>
+                <div class="flex items-start gap-2.5 pt-2 border-t border-rose-200/60">
+                    <i data-lucide="hospital" class="w-4 h-4 text-teal-600 shrink-0 mt-0.5"></i>
+                    <div>
+                        <strong class="block text-slate-900">Nearest Medical Facility Assigned:</strong>
+                        <span>CRPF Base Hospital (Sector 4 Command Post) • 1.4 km away</span>
+                    </div>
+                </div>
+                <div class="flex items-start gap-2.5 pt-2 border-t border-rose-200/60">
+                    <i data-lucide="phone-call" class="w-4 h-4 text-emerald-600 shrink-0 mt-0.5 animate-pulse"></i>
+                    <div>
+                        <strong class="block text-slate-900">Hospital Emergency Call Status:</strong>
+                        <span class="text-emerald-700 font-bold">Incoming Priority Call Requested from Hospital Triage...</span>
+                    </div>
+                </div>
             </div>
-            <h2 class="text-3xl sm:text-5xl font-extrabold mb-4 tracking-tight">Built on Trust, Not Surveillance</h2>
-            <p class="text-slate-300 max-w-2xl mx-auto mb-14 text-base leading-relaxed">
-                AURA is architected so personnel never fear being monitored. Individual health insights are strictly restricted to medical and welfare officers, while commanders view aggregated, anonymized trends.
-            </p>
-            <div class="grid sm:grid-cols-3 gap-6 text-left">
-                <div class="bg-white/5 rounded-2xl p-6 border border-white/10 hover:border-teal-500/50 transition duration-300">
-                    <h4 class="font-bold text-white mb-1 flex items-center gap-2"><i data-lucide="lock" class="w-4 h-4 text-teal-400"></i> Command Anonymization</h4>
-                    <p class="text-sm text-slate-400 mt-2">Commanders see unit health status and readiness indices, never individual names or scores.</p>
-                </div>
-                <div class="bg-white/5 rounded-2xl p-6 border border-white/10 hover:border-teal-500/50 transition duration-300">
-                    <h4 class="font-bold text-white mb-1 flex items-center gap-2"><i data-lucide="user-check" class="w-4 h-4 text-teal-400"></i> Strict Access Control</h4>
-                    <p class="text-sm text-slate-400 mt-2">Personnel-level risk flags are accessible exclusively by authorized welfare officers for support.</p>
-                </div>
-                <div class="bg-white/5 rounded-2xl p-6 border border-white/10 hover:border-teal-500/50 transition duration-300">
-                    <h4 class="font-bold text-white mb-1 flex items-center gap-2"><i data-lucide="file-text" class="w-4 h-4 text-teal-400"></i> Consent-Driven Design</h4>
-                    <p class="text-sm text-slate-400 mt-2">Full transparency on what telemetry is gathered, ensuring complete confidence across ranks.</p>
-                </div>
+
+            <div class="flex gap-3 pt-2">
+                <button onclick="closeLandingSosModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3.5 rounded-xl text-xs transition cursor-pointer">Cancel / False Alarm</button>
+                <button onclick="simulateHospitalCallAccepted()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-black py-3.5 rounded-xl text-xs transition cursor-pointer shadow-lg shadow-emerald-600/30">Accept Hospital Call</button>
             </div>
         </div>
-    </section>
+    </div>
+
+    <!-- CHALLENGE MODAL -->
+    <div id="challenge-modal" class="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white text-slate-900 max-w-lg w-full p-8 rounded-3xl shadow-2xl space-y-6 animate-fade-down">
+            <div class="flex justify-between items-center pb-3 border-b border-slate-100">
+                <h3 id="modal-challenge-title" class="font-bold text-lg text-slate-900">Analysis Breakdown</h3>
+                <button onclick="closeChallengeModal()" class="text-slate-400 hover:text-slate-900 font-bold text-sm cursor-pointer">✕</button>
+            </div>
+            <div id="modal-challenge-body" class="text-xs text-slate-600 space-y-3 leading-relaxed"></div>
+            <button onclick="closeChallengeModal()" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 rounded-xl text-xs transition cursor-pointer">Got It</button>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl border border-rose-500/40 flex items-center gap-3 text-xs font-bold">
+        <i data-lucide="check-circle" class="w-4 h-4 text-rose-400"></i>
+        <span id="toast-msg">Action completed.</span>
+    </div>
 
     <!-- FOOTER -->
     <footer class="bg-white border-t border-slate-200 py-12 text-center text-slate-500 text-sm">
@@ -335,6 +339,64 @@
 
     <script>
         lucide.createIcons();
+
+        function openLandingSosModal() {
+            document.getElementById('landing-sos-modal').classList.remove('hidden');
+        }
+
+        function closeLandingSosModal() {
+            document.getElementById('landing-sos-modal').classList.add('hidden');
+        }
+
+        function simulateHospitalCallAccepted() {
+            closeLandingSosModal();
+            showToast("📞 SECURE LINE CONNECTED: CRPF Base Hospital emergency triage doctor is calling now.");
+        }
+
+        function expandChallenge(id) {
+            const title = document.getElementById('modal-challenge-title');
+            const body = document.getElementById('modal-challenge-body');
+            
+            if (id === 1) {
+                title.innerText = "⏳ Why Reactive Fails in Uniformed Forces";
+                body.innerHTML = `
+                    <p class="font-bold text-slate-800">Traditional Model:</p>
+                    <p>Waiting for a crisis or severe drop in performance before offering counseling or rest rotation.</p>
+                    <p class="font-bold text-slate-800 pt-2">AURA's Proactive Solution:</p>
+                    <p>Continuous predictive tracking of biometrics, night shifts, and missed check-ins flags stress <strong>7 to 14 days before burnout</strong> occurs.</p>
+                `;
+            } else if (id === 2) {
+                title.innerText = "📊 The Danger of Fragmented Signals";
+                body.innerHTML = `
+                    <p class="font-bold text-slate-800">The Silo Problem:</p>
+                    <p>Duty rosters are managed in command software, leave records in HR, and health notes in physical files. None of them talk to each other.</p>
+                    <p class="font-bold text-slate-800 pt-2">AURA's Unified Telemetry:</p>
+                    <p>Our multi-factor correlation engine securely combines roster schedules, sleep patterns, and voice logs into one actionable risk score.</p>
+                `;
+            } else if (id === 3) {
+                title.innerText = "👥 Stretched Officer Ratios";
+                body.innerHTML = `
+                    <p class="font-bold text-slate-800">The Manual Burden:</p>
+                    <p>One welfare officer often oversees over 400+ personnel, making individual check-ins impossible to maintain consistently.</p>
+                    <p class="font-bold text-slate-800 pt-2">AURA's AI Scalability:</p>
+                    <p>Automated explainable AI flags prioritize exactly which 5% of personnel need immediate attention today, multiplying the welfare officer's reach.</p>
+                `;
+            }
+            document.getElementById('challenge-modal').classList.remove('hidden');
+        }
+
+        function closeChallengeModal() {
+            document.getElementById('challenge-modal').classList.add('hidden');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 4500);
+        }
     </script>
 </body>
 </html>
