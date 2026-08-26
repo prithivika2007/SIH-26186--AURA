@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA • Personnel Welfare Intelligence (SIH26186)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/landing.css">
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col justify-between">
+    
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 py-3 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="window.location.href='landing.html'">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center shadow-md shadow-teal-500/20">
+                    <i data-lucide="shield" class="w-5 h-5 text-white"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-bold tracking-tight text-slate-900 flex items-center gap-2">
+                        AURA <span class="text-[10px] px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-600 border border-teal-500/30 font-medium">SIH 26186</span>
+                    </span>
+                    <p class="text-[11px] text-slate-500 font-medium">Personnel Welfare Intelligence</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium">
+                <a href="landing.html" class="text-teal-600">Platform</a>
+                <a href="pages/personnel-dashboard.html" class="text-slate-600 hover:text-slate-900">Personnel Portal</a>
+                <a href="pages/welfare-dashboard.html" class="text-slate-600 hover:text-slate-900">Welfare Officer</a>
+                <a href="pages/commander-dashboard.html" class="text-slate-600 hover:text-slate-900">Commander View</a>
+            </nav>
+            <div>
+                <a href="pages/welfare-dashboard.html" class="btn-primary text-sm flex items-center gap-1.5">
+                    Launch Demo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="hero-gradient py-24 px-4 sm:px-6 lg:px-8 text-center max-w-4xl mx-auto space-y-6">
+            <div class="feature-badge">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Ministry of Home Affairs • CRPF Division
+            </div>
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.1]">
+                Supporting those who protect us.
+            </h1>
+            <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+                AI-powered welfare intelligence for uniformed forces — enabling early support, healthier teams, and stronger operational resilience.
+            </p>
+            <div class="flex justify-center gap-4 pt-4">
+                <a href="pages/welfare-dashboard.html" class="btn-primary">Explore Officer Dashboard</a>
+                <a href="pages/personnel-dashboard.html" class="bg-white border border-slate-300 font-semibold text-slate-700 px-6 py-3 rounded-xl text-sm hover:bg-slate-100 transition-all">Personnel Portal</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200 py-8 text-center text-xs text-slate-500">
+        <p class="font-bold text-slate-800">AURA • Personnel Welfare Intelligence</p>
+        <p class="mt-1">SIH 2026 • Problem Statement SIH26186 • Ministry of Home Affairs</p>
+    </footer>
+
+    <script src="../js/app.js"></script>
+</body>
+</html>

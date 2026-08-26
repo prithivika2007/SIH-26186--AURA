@@ -1,0 +1,27 @@
+.metric-card {
+  background: white;
+  border: 1px solid #E2E8F0;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.badge-urgent {
+  background-color: rgba(244, 63, 94, 0.1);
+  color: #E11D48;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-concern {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: #D97706;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}

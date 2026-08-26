@@ -1,0 +1,12 @@
+.explainable-ai-box {
+  background: #F8FAFC;
+  border: 1px dashed #CBD5E1;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+}
+
+.trajectory-indicator {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: #E11D48;
+}

@@ -1,0 +1,21 @@
+.wellness-ring {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: conic-gradient(#14B8A6 0% 75%, #E2E8F0 75% 100%);
+}
+
+.checkin-card {
+  background: white;
+  border: 1px solid #E2E8F0;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: transform 0.2s;
+}
+
+.checkin-card:hover {
+  transform: translateY(-2px);
+}

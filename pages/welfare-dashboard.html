@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welfare Officer Command Center • AURA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/welfare.css">
+</head>
+<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col justify-between">
+    <header class="bg-white border-b border-slate-200 py-3 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <span class="text-xs font-mono text-teal-600 font-bold uppercase">WELFARE OFFICER COMMAND CENTER</span>
+            <a href="../landing.html" class="text-xs text-slate-500 hover:text-slate-900">← Back to Platform</a>
+        </div>
+    </header>
+    <main class="max-w-7xl mx-auto px-4 py-8 space-y-8 w-full flex-grow">
+        <div class="flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold text-slate-900">Personnel Welfare Overview</h1>
+                <p class="text-xs text-slate-500 mt-0.5">CRPF Police Division II • Active Monitoring Enabled</p>
+            </div>
+            <span class="text-xs font-mono px-3 py-1 rounded bg-teal-50 text-teal-700 border border-teal-200">Secure MVA Active</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+            <div class="metric-card"><p class="text-xs text-slate-500">Total Monitored</p><p class="text-3xl font-extrabold text-slate-900">2,486</p></div>
+            <div class="metric-card"><p class="text-xs text-slate-500">Watch Tier</p><p class="text-3xl font-extrabold text-teal-600">1,742</p></div>
+            <div class="metric-card"><p class="text-xs text-slate-500">Concern Tier</p><p class="text-3xl font-extrabold text-amber-600">521</p></div>
+            <div class="metric-card"><p class="text-xs text-slate-500">Elevated / Urgent</p><p class="text-3xl font-extrabold text-rose-600">223</p></div>
+        </div>
+        <div class="card space-y-4">
+            <h3 class="text-base font-bold text-slate-900">Personnel Requiring Attention</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                    <thead class="border-b border-slate-200 text-slate-500 font-mono">
+                        <tr><th class="pb-3">Personnel ID</th><th class="pb-3">Unit</th><th class="pb-3">Risk Tier</th><th class="pb-3">Trajectory</th><th class="pb-3 text-right">Action</th></tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr>
+                            <td class="py-3.5 font-mono font-bold text-slate-900">P-10482</td>
+                            <td class="py-3.5 text-slate-600">Alpha Battalion - CRPF</td>
+                            <td class="py-3.5"><span class="badge-urgent">Elevated</span></td>
+                            <td class="py-3.5 font-mono text-slate-600">↑ Deteriorating</td>
+                            <td class="py-3.5 text-right"><a href="personnel-detail.html?id=P-10482" class="px-3 py-1.5 rounded-lg bg-teal-50 text-teal-700 border border-teal-200 font-semibold">Inspect</a></td>
+                        </tr>
+                        <tr>
+                            <td class="py-3.5 font-mono font-bold text-slate-900">P-10491</td>
+                            <td class="py-3.5 text-slate-600">Bravo Company</td>
+                            <td class="py-3.5"><span class="badge-concern">Moderate</span></td>
+                            <td class="py-3.5 font-mono text-slate-600">→ Stable</td>
+                            <td class="py-3.5 text-right"><a href="personnel-detail.html?id=P-10491" class="px-3 py-1.5 rounded-lg bg-teal-50 text-teal-700 border border-teal-200 font-semibold">Inspect</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+        <p>AURA Welfare Intelligence • SIH 26186</p>
+    </footer>
+    <script src="../js/app.js"></script>
+</body>
+</html>
