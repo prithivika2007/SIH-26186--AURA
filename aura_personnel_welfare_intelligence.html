@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA • Personnel Welfare Intelligence (SIH26186)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            900: '#070D1F',
+                            800: '#0A1128',
+                            700: '#111A3A',
+                        },
+                        teal: {
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #070D1F;
+            color: #f8fafc;
+        }
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* Custom smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-[#070D1F] text-slate-100 min-h-screen selection:bg-teal-500 selection:text-slate-950 flex flex-col justify-between">
+
+    <!-- Sticky Navbar -->
+    <header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#0A1128]/90 backdrop-blur-md border-b border-white/10 py-3 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchRoute('landing')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-indigo-600 flex items-center justify-center shadow-md shadow-teal-500/20 border border-white/20">
+                    <i data-lucide="shield" class="w-5 h-5 text-white"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                        AURA <span class="text-[10px] px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/30 font-medium">SIH 26186</span>
+                    </span>
+                    <p class="text-[11px] text-slate-400 font-medium">Personnel Welfare Intelligence</p>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-6">
+                <button onclick="switchRoute('landing')" id="nav-landing" class="text-sm font-medium transition-colors text-teal-400">Platform</button>
+                <button onclick="switchRoute('personnel')" id="nav-personnel" class="text-sm font-medium transition-colors text-slate-300 hover:text-white">Personnel Portal</button>
+                <button onclick="switchRoute('welfare')" id="nav-welfare" class="text-sm font-medium transition-colors text-slate-300 hover:text-white">Welfare Officer</button>
+                <button onclick="switchRoute('commander')" id="nav-commander" class="text-sm font-medium transition-colors text-slate-300 hover:text-white">Commander View</button>
+                <button onclick="switchRoute('admin')" id="nav-admin" class="text-sm font-medium transition-colors text-slate-300 hover:text-white">Admin & Audit</button>
+            </nav>
+
+            <!-- Right Actions -->
+            <div class="hidden md:flex items-center space-x-3">
+                <button onclick="switchRoute('login')" class="bg-teal-500 hover:bg-teal-400 text-slate-950 font-semibold px-4 py-2 rounded-lg text-sm shadow-md shadow-teal-500/20 transition-all flex items-center gap-1.5">
+                    Sign In / Demo
+                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-slate-300 hover:text-white">
+                <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#0A1128] border-b border-white/10 px-6 py-4 space-y-3">
+            <button onclick="switchRoute('landing'); toggleMobileMenu();" class="block w-full text-left text-sm py-2 text-slate-300">Platform Overview</button>
+            <button onclick="switchRoute('personnel'); toggleMobileMenu();" class="block w-full text-left text-sm py-2 text-slate-300">Personnel Portal</button>
+            <button onclick="switchRoute('welfare'); toggleMobileMenu();" class="block w-full text-left text-sm py-2 text-slate-300">Welfare Officer Dashboard</button>
+            <button onclick="switchRoute('commander'); toggleMobileMenu();" class="block w-full text-left text-sm py-2 text-slate-300">Commander View</button>
+            <button onclick="switchRoute('admin'); toggleMobileMenu();" class="block w-full text-left text-sm py-2 text-slate-300">Admin & Permissions</button>
+            <button onclick="switchRoute('login'); toggleMobileMenu();" class="w-full bg-teal-500 text-slate-950 font-semibold py-2 rounded-lg text-sm mt-2">Sign In</button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main id="app-container" class="flex-grow pt-20">
+        <!-- Default Landing Page Content -->
+        <div id="page-landing" class="space-y-0">
+            
+            <!-- HERO SECTION -->
+            <section class="relative min-h-[90vh] flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+                <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                    
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-xs font-medium text-teal-400">
+                            <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Ministry of Home Affairs • CRPF Police II Division
+                        </div>
+
+                        <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
+                            Predict risk. <br />
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-teal-300 to-indigo-400">
+                                Protect wellbeing. Strengthen resilience.
+                            </span>
+                        </h1>
+
+                        <p class="text-lg text-slate-300 font-normal max-w-2xl leading-relaxed">
+                            AI-powered predictive welfare intelligence for uniformed forces — identifying early indicators of stress, fatigue and burnout before they become critical.
+                        </p>
+
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+                            <button onclick="switchRoute('welfare')" class="bg-teal-500 hover:bg-teal-400 text-slate-950 font-semibold px-6 py-3.5 rounded-xl text-sm transition-all shadow-lg shadow-teal-500/20 flex items-center justify-center gap-2">
+                                Explore Platform Demo
+                                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                            </button>
+                            <button onclick="document.getElementById('how-it-works').scrollIntoView({behavior: 'smooth'})" class="bg-white/5 hover:bg-white/10 text-white font-medium px-6 py-3.5 rounded-xl text-sm transition-all border border-white/10 flex items-center justify-center gap-2">
+                                How It Works
+                            </button>
+                        </div>
+
+                        <div class="pt-4 flex items-center gap-6 text-xs text-slate-400 border-t border-white/10">
+                            <span class="flex items-center gap-1.5"><i data-lucide="shield-check" class="w-4 h-4 text-teal-400"></i> Welfare, Not Surveillance</span>
+                            <span class="flex items-center gap-1.5"><i data-lucide="lock" class="w-4 h-4 text-teal-400"></i> Privacy by Design</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Visual Pipeline -->
+                    <div class="lg:col-span-5">
+                        <div class="bg-gradient-to-b from-white/[0.08] to-white/[0.02] border border-white/10 rounded-3xl p-6 backdrop-blur-xl shadow-2xl space-y-4">
+                            <div class="flex items-center justify-between pb-3 border-b border-white/10">
+                                <span class="text-xs font-mono text-teal-400 uppercase tracking-wider">AURA Architecture Pipeline</span>
+                                <span class="text-[10px] text-teal-400 font-mono px-2 py-0.5 rounded bg-teal-500/10">SECURE MVA</span>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div class="bg-slate-900/80 border border-white/10 rounded-xl p-3 flex items-center justify-between text-xs text-slate-300">
+                                    <span>Duty Data + Leave + Workload</span>
+                                    <span class="text-teal-400 font-mono">MULTI-SIGNAL</span>
+                                </div>
+                                <div class="flex justify-center"><div class="w-0.5 h-4 bg-teal-500"></div></div>
+                                <div class="bg-gradient-to-r from-teal-950/40 to-indigo-950/40 border border-teal-500/30 rounded-xl p-4 text-center">
+                                    <div class="w-8 h-8 rounded-lg bg-teal-500/20 flex items-center justify-center text-teal-300 mx-auto mb-2">
+                                        <i data-lucide="cpu" class="w-4 h-4"></i>
+                                    </div>
+                                    <p class="text-sm font-bold text-white">AI Welfare Engine</p>
+                                    <p class="text-[11px] text-slate-300 mt-0.5">Early indicator risk estimation</p>
+                                </div>
+                                <div class="flex justify-center"><div class="w-0.5 h-4 bg-teal-500"></div></div>
+                                <div class="bg-slate-900/80 border border-white/10 rounded-xl p-3.5 flex items-center justify-between">
+                                    <span class="text-xs font-medium text-white">Risk + Explainability + Proactive Support</span>
+                                    <span class="text-xs text-teal-400 font-mono">TIMELY</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- PROBLEM SECTION -->
+            <section class="py-24 bg-[#0A1128] border-t border-white/5">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                        <span class="text-xs font-mono px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20">Operational Reality</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-white">Stress doesn't always announce itself.</h2>
+                        <p class="text-slate-300 text-sm">Uniformed personnel operating in high-stakes environments experience cumulative pressures that build silently over time.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-white/[0.02] border border-white/10 rounded-2xl p-6 hover:bg-white/[0.04] transition-all">
+                            <div class="w-8 h-8 rounded-lg bg-teal-500/10 flex items-center justify-center text-teal-400 mb-4 font-mono font-bold text-xs">01</div>
+                            <h3 class="text-base font-bold text-white mb-2">Extended Deployment</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed">Prolonged separation from home environments and continuous high-alert operations.</p>
+                        </div>
+                        <div class="bg-white/[0.02] border border-white/10 rounded-2xl p-6 hover:bg-white/[0.04] transition-all">
+                            <div class="w-8 h-8 rounded-lg bg-teal-500/10 flex items-center justify-center text-teal-400 mb-4 font-mono font-bold text-xs">02</div>
+                            <h3 class="text-base font-bold text-white mb-2">Long Duty Hours</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed">Sustained high-tempo shifts demanding constant cognitive and physical vigilance.</p>
+                        </div>
+                        <div class="bg-white/[0.02] border border-white/10 rounded-2xl p-6 hover:bg-white/[0.04] transition-all">
+                            <div class="w-8 h-8 rounded-lg bg-teal-500/10 flex items-center justify-center text-teal-400 mb-4 font-mono font-bold text-xs">03</div>
+                            <h3 class="text-base font-bold text-white mb-2">Consecutive Shifts</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed">Repeated rotation cycles without sufficient downtime for deep physiological recovery.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SOLUTION SECTION / HOW IT WORKS -->
+            <section id="how-it-works" class="py-24 bg-[#070D1F] border-t border-white/5">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                        <span class="text-xs font-mono px-3 py-1 rounded-full bg-teal-500/10 text-teal-400 border border-teal-500/20">Intelligence Framework</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-white">One signal is rarely enough.</h2>
+                        <p class="text-slate-300 text-sm">AURA integrates multi-signal indicators to provide a comprehensive, holistic assessment of welfare risk.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-slate-900 border border-white/10 rounded-2xl p-6 space-y-3">
+                            <h3 class="text-sm font-bold text-teal-400 uppercase tracking-wider font-mono">1. Duty Signals</h3>
+                            <ul class="space-y-2 text-xs text-slate-300">
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span> Duty duration & consecutive days</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span> Night-duty frequency</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-900 border border-white/10 rounded-2xl p-6 space-y-3">
+                            <h3 class="text-sm font-bold text-teal-400 uppercase tracking-wider font-mono">2. HR Signals</h3>
+                            <ul class="space-y-2 text-xs text-slate-300">
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span> Leave utilization & deficits</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span> Deployment duration</li>
+                            </ul>
+                        </div>
+                        <div class="bg-slate-900 border border-white/10 rounded-2xl p-6 space-y-3">
+                            <h3 class="text-sm font-bold text-teal-400 uppercase tracking-wider font-mono">3. Voluntary Wellness</h3>
+                            <ul class="space-y-2 text-xs text-slate-300">
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span> Self-reported stress check-ins</li>
+                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-teal-400"></span> Sleep quality & fatigue scores</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#050914] border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-400">
+            <div>
+                <p class="font-bold text-white">AURA • Personnel Welfare Intelligence</p>
+                <p class="mt-1">SIH 2026 • Problem Statement SIH26186 • Ministry of Home Affairs</p>
+            </div>
+            <div class="flex gap-6">
+                <button onclick="switchRoute('landing')" class="hover:text-white">Platform</button>
+                <button onclick="switchRoute('welfare')" class="hover:text-white">Welfare Dashboard</button>
+                <button onclick="switchRoute('admin')" class="hover:text-white">Admin Audit</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Router & Interactive Logic -->
+    <script>
+        // Initialize Lucide icons on load
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        const PERSONNEL_RECORDS = [
+            { id: "P-10482", unit: "Alpha Battalion - CRPF", risk: "Elevated", trajectory: "↑ Deteriorating", primaryIndicator: "Consecutive duty burden", score: 84 },
+            { id: "P-10491", unit: "Bravo Company", risk: "Moderate", trajectory: "→ Stable", primaryIndicator: "Night-duty frequency", score: 62 },
+            { id: "P-10503", unit: "Charlie Group", risk: "Watch", trajectory: "↓ Improving", primaryIndicator: "Standard operational baseline", score: 28 },
+            { id: "P-10519", unit: "Delta Battalion", risk: "Elevated", trajectory: "↑ Deteriorating", primaryIndicator: "Recovery window deficit", score: 79 },
+            { id: "P-10602", unit: "Echo Unit", risk: "Moderate", trajectory: "→ Stable", primaryIndicator: "Workload distribution", score: 55 },
+        ];
+
+        function switchRoute(route, param) {
+            const container = document.getElementById('app-container');
+            
+            // Update Nav Active State
+            ['landing', 'personnel', 'welfare', 'commander', 'admin'].forEach(r => {
+                const btn = document.getElementById(`nav-${r}`);
+                if(btn) {
+                    if(r === route) {
+                        btn.className = "text-sm font-medium transition-colors text-teal-400";
+                    } else {
+                        btn.className = "text-sm font-medium transition-colors text-slate-300 hover:text-white";
+                    }
+                }
+            });
+
+            if (route === 'landing') {
+                container.innerHTML = `
+                <div class="space-y-0">
+                    <section class="relative min-h-[90vh] flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+                        <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+                            <div class="lg:col-span-7 space-y-6">
+                                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/10 text-xs font-medium text-teal-400">
+                                    <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Ministry of Home Affairs • CRPF Police II Division
+                                </div>
+                                <h1 class="text-4xl sm:text-6xl font-extrabold text-white tracking-tight leading-[1.1]">
+                                    Predict risk. <br />
+                                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-teal-300 to-indigo-400">
+                                        Protect wellbeing. Strengthen resilience.
+                                    </span>
+                                </h1>
+                                <p class="text-lg text-slate-300 font-normal max-w-2xl leading-relaxed">
+                                    AI-powered predictive welfare intelligence for uniformed forces — identifying early indicators of stress, fatigue and burnout before they become critical.
+                                </p>
+                                <div class="flex gap-4 pt-2">
+                                    <button onclick="switchRoute('welfare')" class="bg-teal-500 text-slate-950 font-semibold px-6 py-3.5 rounded-xl text-sm shadow-lg shadow-teal-500/20 flex items-center gap-2">
+                                        Explore Platform Demo <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-5 bg-[#0A1128] border border-white/10 rounded-3xl p-6 shadow-2xl space-y-4">
+                                <span class="text-xs font-mono text-teal-400 uppercase tracking-wider">AURA Architecture Pipeline</span>
+                                <div class="bg-slate-900 border border-white/10 rounded-xl p-3 text-xs text-slate-300 flex justify-between">
+                                    <span>Duty Data + Leave + Workload</span><span class="text-teal-400 font-mono">MULTI-SIGNAL</span>
+                                </div>
+                                <div class="bg-teal-950/40 border border-teal-500/30 rounded-xl p-4 text-center">
+                                    <p class="text-sm font-bold text-white">AI Welfare Engine</p>
+                                    <p class="text-[11px] text-slate-300 mt-0.5">Early indicator risk estimation</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>`;
+            } else if (route === 'personnel') {
+    container.innerHTML = `
+    <div class="min-h-screen bg-[#10150f] text-[#e8eadf] px-4 md:px-8 py-8">
+
+        <!-- HEADER -->
+        <div class="max-w-6xl mx-auto mb-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <div>
+                    <div class="text-xs tracking-[0.25em] text-[#9ca68b] font-mono mb-2">
+                        AURA / PERSONNEL WELFARE
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-black uppercase tracking-tight">
+                        Personnel Dashboard
+                    </h1>
+                    <p class="text-[#9ca68b] mt-2">
+                        Welcome back, P-10482. Here's your welfare overview.
+                    </p>
+                </div>
+
+                <div class="border border-[#4c563e] bg-[#171d14] rounded-xl px-5 py-3">
+                    <div class="text-[10px] uppercase tracking-widest text-[#899378]">
+                        Personnel ID
+                    </div>
+                    <div class="font-mono text-lg font-bold text-[#c7d29e]">
+                        P-10482
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TOP CARDS -->
+        <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-6">
+
+            <!-- WELLNESS GAUGE -->
+            <div class="bg-[#171d14] border border-[#3d4833] rounded-2xl p-6 shadow-xl">
+                <div class="flex items-center justify-between mb-4">
+                    <div>
+                        <div class="text-xs uppercase tracking-widest text-[#899378]">
+                            Overall Welfare
+                        </div>
+                        <h2 class="text-xl font-bold mt-1">Wellness Score</h2>
+                    </div>
+
+                    <div id="auraStatus"
+                         class="px-3 py-1 rounded-full text-xs font-bold bg-[#304c31] text-[#b9d6a4]">
+                        STEADY
+                    </div>
+                </div>
+
+                <div class="relative mx-auto w-[280px] h-[170px] overflow-hidden mt-4">
+
+                    <!-- Gauge -->
+                    <div class="absolute left-1/2 -translate-x-1/2 top-4
+                                w-[240px] h-[240px] rounded-full
+                                border-[28px] border-transparent
+                                border-t-[#60733d]
+                                rotate-[-45deg]">
+                    </div>
+
+                    <div class="absolute left-1/2 -translate-x-1/2 top-4
+                                w-[240px] h-[240px] rounded-full
+                                border-[28px] border-transparent
+                                border-r-[#b18a42]
+                                rotate-[-45deg]">
+                    </div>
+
+                    <div class="absolute left-1/2 -translate-x-1/2 top-4
+                                w-[240px] h-[240px] rounded-full
+                                border-[28px] border-transparent
+                                border-b-[#8f4d42]
+                                rotate-[-45deg]">
+                    </div>
+
+                    <!-- Needle -->
+                    <div id="auraNeedle"
+                         class="absolute left-1/2 bottom-[25px] w-1 h-[105px]
+                                bg-[#d9d6bd] origin-bottom rounded-full
+                                shadow-lg"
+                         style="transform: translateX(-50%) rotate(35deg);">
+                    </div>
+
+                    <div class="absolute left-1/2 bottom-[18px] -translate-x-1/2
+                                w-5 h-5 rounded-full bg-[#d9d6bd] border-4 border-[#10150f]">
+                    </div>
+
+                    <!-- Score -->
+                    <div class="absolute left-1/2 bottom-[-2px] -translate-x-1/2 text-center">
+                        <div id="auraScore"
+                             class="text-4xl font-black font-mono text-[#d8ddc4]">
+                            82
+                        </div>
+                        <div class="text-[10px] uppercase tracking-[0.3em] text-[#899378]">
+                            / 100
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 mt-6">
+
+                    <div class="bg-[#10150f] rounded-xl p-4">
+                        <div class="text-xs text-[#899378]">Stress</div>
+                        <div id="stressValue" class="text-2xl font-bold mt-1">38%</div>
+                    </div>
+
+                    <div class="bg-[#10150f] rounded-xl p-4">
+                        <div class="text-xs text-[#899378]">Fatigue</div>
+                        <div id="fatigueValue" class="text-2xl font-bold mt-1">32%</div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- TODAY'S STATUS -->
+            <div class="bg-[#171d14] border border-[#3d4833] rounded-2xl p-6 shadow-xl">
+
+                <div class="text-xs uppercase tracking-widest text-[#899378]">
+                    Today's Overview
+                </div>
+
+                <h2 class="text-xl font-bold mt-1 mb-6">
+                    Current Indicators
+                </h2>
+
+                <div class="space-y-4">
+
+                    <div class="flex items-center justify-between bg-[#10150f] rounded-xl p-4">
+                        <div class="flex items-center gap-3">
+                            <div class="text-2xl">🙂</div>
+                            <div>
+                                <div class="font-semibold">Mood</div>
+                                <div class="text-xs text-[#899378]">Today's check-in</div>
+                            </div>
+                        </div>
+                        <div id="moodDisplay"
+                             class="font-bold text-[#c7d29e]">
+                            Good
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between bg-[#10150f] rounded-xl p-4">
+                        <div class="flex items-center gap-3">
+                            <div class="text-2xl">😴</div>
+                            <div>
+                                <div class="font-semibold">Sleep</div>
+                                <div class="text-xs text-[#899378]">Last night</div>
+                            </div>
+                        </div>
+                        <div id="sleepDisplay"
+                             class="font-bold text-[#c7d29e]">
+                            7 hrs
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between bg-[#10150f] rounded-xl p-4">
+                        <div class="flex items-center gap-3">
+                            <div class="text-2xl">⚡</div>
+                            <div>
+                                <div class="font-semibold">Energy</div>
+                                <div class="text-xs text-[#899378]">Current level</div>
+                            </div>
+                        </div>
+                        <div id="energyDisplay"
+                             class="font-bold text-[#c7d29e]">
+                            72%
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mt-5 p-4 rounded-xl border border-[#4c563e] bg-[#1c2418]">
+                    <div class="text-xs uppercase tracking-widest text-[#899378]">
+                        Privacy
+                    </div>
+                    <p class="text-sm text-[#c6cbb9] mt-1">
+                        Your welfare check-in is intended to support your wellbeing.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- DAILY CHECK-IN -->
+        <div class="max-w-6xl mx-auto mt-6 bg-[#171d14] border border-[#3d4833] rounded-2xl p-6 shadow-xl">
+
+            <div class="mb-7">
+                <div class="text-xs uppercase tracking-widest text-[#899378]">
+                    Daily Check-In
+                </div>
+                <h2 class="text-2xl font-bold mt-1">
+                    How are you feeling today?
+                </h2>
+                <p class="text-sm text-[#899378] mt-2">
+                    Select the option that best represents how you feel right now.
+                </p>
+            </div>
+
+
+            <!-- MOOD -->
+            <div class="mb-8">
+
+                <div class="text-sm font-semibold mb-3">
+                    Mood
+                </div>
+
+                <div class="grid grid-cols-5 gap-2 md:gap-4">
+
+                    <button onclick="selectAuraMood(1)"
+                            id="moodBtn1"
+                            class="aura-mood-btn border border-[#3d4833] bg-[#10150f] rounded-xl p-4 text-center hover:border-[#87965f] transition">
+                        <div class="text-3xl">😄</div>
+                        <div class="text-xs mt-2">Great</div>
+                    </button>
+
+                    <button onclick="selectAuraMood(2)"
+                            id="moodBtn2"
+                            class="aura-mood-btn border border-[#87965f] bg-[#26301f] rounded-xl p-4 text-center transition">
+                        <div class="text-3xl">🙂</div>
+                        <div class="text-xs mt-2">Good</div>
+                    </button>
+
+                    <button onclick="selectAuraMood(3)"
+                            id="moodBtn3"
+                            class="aura-mood-btn border border-[#3d4833] bg-[#10150f] rounded-xl p-4 text-center hover:border-[#87965f] transition">
+                        <div class="text-3xl">😐</div>
+                        <div class="text-xs mt-2">Okay</div>
+                    </button>
+
+                    <button onclick="selectAuraMood(4)"
+                            id="moodBtn4"
+                            class="aura-mood-btn border border-[#3d4833] bg-[#10150f] rounded-xl p-4 text-center hover:border-[#87965f] transition">
+                        <div class="text-3xl">😕</div>
+                        <div class="text-xs mt-2">Low</div>
+                    </button>
+
+                    <button onclick="selectAuraMood(5)"
+                            id="moodBtn5"
+                            class="aura-mood-btn border border-[#3d4833] bg-[#10150f] rounded-xl p-4 text-center hover:border-[#87965f] transition">
+                        <div class="text-3xl">😔</div>
+                        <div class="text-xs mt-2">Very Low</div>
+                    </button>
+
+                </div>
+            </div>
+
+
+            <!-- SLEEP -->
+            <div class="mb-8">
+
+                <div class="flex justify-between mb-3">
+                    <div>
+                        <div class="font-semibold">Sleep</div>
+                        <div class="text-xs text-[#899378]">
+                            How much did you sleep last night?
+                        </div>
+                    </div>
+
+                    <div id="sleepValue"
+                         class="font-mono font-bold text-[#c7d29e]">
+                        7 hrs
+                    </div>
+                </div>
+
+                <input
+                    id="sleepSlider"
+                    type="range"
+                    min="3"
+                    max="10"
+                    step="0.5"
+                    value="7"
+                    oninput="updateAuraCheckin()"
+                    class="w-full accent-[#9aa86a] cursor-pointer"
+                />
+
+                <div class="flex justify-between text-[10px] text-[#68725c] mt-2">
+                    <span>3 hrs</span>
+                    <span>7 hrs</span>
+                    <span>10 hrs</span>
+                </div>
+
+            </div>
+
+
+            <!-- ENERGY -->
+            <div class="mb-8">
+
+                <div class="flex justify-between mb-3">
+                    <div>
+                        <div class="font-semibold">Energy</div>
+                        <div class="text-xs text-[#899378]">
+                            How energetic do you feel?
+                        </div>
+                    </div>
+
+                    <div id="energyValue"
+                         class="font-mono font-bold text-[#c7d29e]">
+                        72%
+                    </div>
+                </div>
+
+                <input
+                    id="energySlider"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="72"
+                    oninput="updateAuraCheckin()"
+                    class="w-full accent-[#9aa86a] cursor-pointer"
+                />
+
+                <div class="flex justify-between text-[10px] text-[#68725c] mt-2">
+                    <span>Low</span>
+                    <span>Moderate</span>
+                    <span>High</span>
+                </div>
+
+            </div>
+
+
+            <!-- SUBMIT -->
+            <button
+                onclick="submitAuraCheckin()"
+                class="w-full md:w-auto px-7 py-3 rounded-xl bg-[#9aa86a] text-[#10150f] font-bold hover:bg-[#b4c185] transition">
+                Submit Daily Check-In
+            </button>
+
+            <div id="checkinMessage"
+                 class="hidden mt-4 p-3 rounded-xl bg-[#21351f] border border-[#476247] text-sm text-[#c8d8bc]">
+            </div>
+
+        </div>
+
+
+        <!-- RECOMMENDATIONS -->
+        <div class="max-w-6xl mx-auto mt-6">
+
+            <div class="mb-5">
+                <div class="text-xs uppercase tracking-widest text-[#899378]">
+                    AURA Intelligence
+                </div>
+                <h2 class="text-2xl font-bold mt-1">
+                    Personal Recommendations
+                </h2>
+            </div>
+
+            <div id="auraRecommendations"
+                 class="grid md:grid-cols-3 gap-4">
+            </div>
+
+        </div>
+
+    </div>
+    `;
+
+    // ---------- PERSONNEL CHECK-IN LOGIC ----------
+
+    let auraMood = 2;
+
+    window.selectAuraMood = function(value) {
+        auraMood = value;
+
+        for (let i = 1; i <= 5; i++) {
+            const btn = document.getElementById('moodBtn' + i);
+
+            if (!btn) continue;
+
+            if (i === value) {
+                btn.classList.remove('bg-[#10150f]', 'border-[#3d4833]');
+                btn.classList.add('bg-[#26301f]', 'border-[#87965f]');
+            } else {
+                btn.classList.remove('bg-[#26301f]', 'border-[#87965f]');
+                btn.classList.add('bg-[#10150f]', 'border-[#3d4833]');
+            }
+        }
+
+        updateAuraCheckin();
+    };
+
+
+    window.updateAuraCheckin = function() {
+
+        const sleep = Number(document.getElementById('sleepSlider').value);
+        const energy = Number(document.getElementById('energySlider').value);
+
+        document.getElementById('sleepValue').textContent =
+            sleep + ' hrs';
+
+        document.getElementById('sleepDisplay').textContent =
+            sleep + ' hrs';
+
+        document.getElementById('energyValue').textContent =
+            energy + '%';
+
+        document.getElementById('energyDisplay').textContent =
+            energy + '%';
+
+        const moodNames = [
+            '',
+            'Great',
+            'Good',
+            'Okay',
+            'Low',
+            'Very Low'
+        ];
+
+        document.getElementById('moodDisplay').textContent =
+            moodNames[auraMood];
+
+        // Demo wellness score.
+        // This is placeholder logic until the real ML/backend output is connected.
+        const moodScore = ((auraMood - 1) / 4) * 100;
+
+        const sleepDistance = Math.abs(8 - sleep);
+        const sleepScore = Math.max(0, 100 - (sleepDistance * 18));
+
+        const score = Math.round(
+            (moodScore * 0.35) +
+            (sleepScore * 0.35) +
+            (energy * 0.30)
+        );
+
+        document.getElementById('auraScore').textContent = score;
+
+        let status = 'STEADY';
+
+        if (score < 55) {
+            status = 'REACH OUT';
+        } else if (score < 72) {
+            status = 'KEEP AN EYE ON IT';
+        }
+
+        const statusEl = document.getElementById('auraStatus');
+
+        if (statusEl) {
+            statusEl.textContent = status;
+        }
+
+        // Approximate gauge needle movement
+        const needle = document.getElementById('auraNeedle');
+
+        if (needle) {
+            const angle = -65 + (score * 1.3);
+            needle.style.transform =
+                'translateX(-50%) rotate(' + angle + 'deg)';
+        }
+
+        updateAuraRecommendations();
+    };
+
+
+    window.updateAuraRecommendations = function() {
+
+        const sleep = Number(document.getElementById('sleepSlider').value);
+        const energy = Number(document.getElementById('energySlider').value);
+
+        const recommendations = [];
+
+        if (sleep < 6) {
+            recommendations.push({
+                icon: '😴',
+                title: 'Recovery',
+                text: 'Your sleep duration is lower than your usual recovery target. Consider prioritising rest when possible.'
+            });
+        }
+
+        if (energy < 45) {
+            recommendations.push({
+                icon: '⚡',
+                title: 'Energy Break',
+                text: 'Your energy level is low. A short recovery break and hydration may help you reset.'
+            });
+        }
+
+        if (auraMood >= 4) {
+            recommendations.push({
+                icon: '💬',
+                title: 'Wellbeing Support',
+                text: 'You indicated a lower mood today. Consider connecting with someone you trust or using available welfare support.'
+            });
+        }
+
+        if (recommendations.length === 0) {
+            recommendations.push({
+                icon: '🌿',
+                title: 'Stay Steady',
+                text: 'Your current indicators look steady. Keep your regular sleep, recovery and daily wellbeing routine.'
+            });
+        }
+
+        // Always show up to 3 cards
+        while (recommendations.length < 3) {
+            recommendations.push({
+                icon: '✓',
+                title: 'Maintain Routine',
+                text: 'Continue checking in regularly so AURA can understand changes in your welfare indicators.'
+            });
+        }
+
+        const box = document.getElementById('auraRecommendations');
+
+        if (!box) return;
+
+        box.innerHTML = recommendations.slice(0, 3).map(item => `
+            <div class="bg-[#171d14] border border-[#3d4833] rounded-2xl p-5 hover:border-[#718052] transition">
+                <div class="text-3xl mb-4">${item.icon}</div>
+                <h3 class="font-bold text-lg">${item.title}</h3>
+                <p class="text-sm text-[#9ba48d] mt-2 leading-6">
+                    ${item.text}
+                </p>
+            </div>
+        `).join('');
+    };
+
+
+    window.submitAuraCheckin = function() {
+
+        updateAuraCheckin();
+
+        const message =
+            document.getElementById('checkinMessage');
+
+        message.textContent =
+            '✓ Check-in recorded. Your welfare information is being used to provide personalised guidance.';
+
+        message.classList.remove('hidden');
+
+        setTimeout(() => {
+            message.classList.add('hidden');
+        }, 5000);
+    };
+
+
+    // Initial state
+    updateAuraCheckin();
+
+    // Keep this existing route exactly as it is:
+} else if (route === 'welfare') {
+            } else if (route === 'welfare') {
+                container.innerHTML = `
+                <div class="min-h-[80vh] text-slate-100 p-4 sm:p-8 max-w-7xl mx-auto space-y-8">
+                    <div class="flex justify-between items-center pb-4 border-b border-white/10">
+                        <div>
+                            <span class="text-xs font-mono text-teal-400">WELFARE OFFICER COMMAND CENTER</span>
+                            <h1 class="text-2xl font-bold text-white">Personnel Welfare Overview</h1>
+                        </div>
+                        <span class="text-xs font-mono px-3 py-1 rounded bg-teal-500/10 text-teal-400 border border-teal-500/20">Active Division: CRPF Police II</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                        <div class="bg-[#0A1128] border border-white/10 rounded-2xl p-5"><p class="text-xs text-slate-400">Total Monitored</p><p class="text-3xl font-extrabold text-white mt-1">2,486</p></div>
+                        <div class="bg-[#0A1128] border border-white/10 rounded-2xl p-5"><p class="text-xs text-slate-400">Watch Tier</p><p class="text-3xl font-extrabold text-teal-400 mt-1">1,742</p></div>
+                        <div class="bg-[#0A1128] border border-white/10 rounded-2xl p-5"><p class="text-xs text-slate-400">Concern Tier</p><p class="text-3xl font-extrabold text-amber-400 mt-1">521</p></div>
+                        <div class="bg-[#0A1128] border border-white/10 rounded-2xl p-5"><p class="text-xs text-slate-400">Elevated / Urgent</p><p class="text-3xl font-extrabold text-rose-400 mt-1">223</p></div>
+                    </div>
+                    <div class="bg-[#0A1128] border border-white/10 rounded-3xl p-6 space-y-6">
+                        <h3 class="text-base font-bold text-white">Personnel Requiring Attention (DEMO DATA)</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs">
+                                <thead class="border-b border-white/10 text-slate-400 font-mono">
+                                    <tr><th class="pb-3">Personnel ID</th><th class="pb-3">Unit</th><th class="pb-3">Risk Tier</th><th class="pb-3">Trajectory</th><th class="pb-3 text-right">Action</th></tr>
+                                </thead>
+                                <tbody class="divide-y divide-white/5">
+                                    ${PERSONNEL_RECORDS.map(p => `
+                                        <tr class="hover:bg-white/[0.02]">
+                                            <td class="py-3.5 font-mono font-bold text-white">${p.id}</td>
+                                            <td class="py-3.5 text-slate-300">${p.unit}</td>
+                                            <td class="py-3.5"><span class="px-2.5 py-1 rounded-full ${p.risk === 'Elevated' ? 'bg-rose-500/20 text-rose-400' : 'bg-amber-500/20 text-amber-400'} text-xs font-semibold">${p.risk}</span></td>
+                                            <td class="py-3.5 font-mono text-slate-300">${p.trajectory}</td>
+                                            <td class="py-3.5 text-right"><button onclick="switchRoute('personnel-detail', '${p.id}')" class="px-3 py-1.5 rounded-lg bg-teal-500/10 text-teal-400 border border-teal-500/30 font-semibold">Inspect</button></td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>`;
+            } else if (route === 'personnel-detail') {
+                const record = PERSONNEL_RECORDS.find(r => r.id === param) || PERSONNEL_RECORDS[0];
+                container.innerHTML = `
+                <div class="min-h-[80vh] text-slate-100 p-4 sm:p-8 max-w-4xl mx-auto space-y-6">
+                    <button onclick="switchRoute('welfare')" class="text-xs text-teal-400 hover:underline">← Back to Welfare Officer Dashboard</button>
+                    <div class="bg-[#0A1128] border border-white/10 rounded-3xl p-8 space-y-6">
+                        <div class="flex justify-between items-center pb-4 border-b border-white/10">
+                            <div>
+                                <span class="text-xs font-mono text-teal-400">INDIVIDUAL WELFARE INTELLIGENCE</span>
+                                <h1 class="text-2xl font-bold text-white font-mono mt-1">Personnel Record: ${record.id}</h1>
+                                <p class="text-xs text-slate-400">${record.unit}</p>
+                            </div>
+                            <span class="px-3 py-1 rounded-full bg-rose-500/20 text-rose-400 text-xs font-semibold">${record.risk} Risk</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-4">
+                                <div class="bg-white/5 border border-white/10 p-4 rounded-2xl space-y-2">
+                                    <p class="text-xs text-slate-400">Risk Score & Trajectory</p>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-2xl font-bold font-mono text-white">${record.score}%</span>
+                                        <span class="text-sm font-semibold text-rose-400">${record.trajectory}</span>
+                                    </div>
+                                </div>
+                                <div class="bg-white/5 border border-white/10 p-4 rounded-2xl space-y-2">
+                                    <p class="text-xs text-slate-400">Contributing Indicators (Explainable AI)</p>
+                                    <ul class="space-y-1.5 text-xs text-slate-300">
+                                        <li>• ${record.primaryIndicator}</li>
+                                        <li>• Extended consecutive duty duration</li>
+                                        <li>• Reduced physiological recovery window</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="bg-teal-500/10 border border-teal-500/30 p-6 rounded-2xl flex flex-col justify-between space-y-4">
+                                <div>
+                                    <p class="text-xs font-bold text-teal-300 uppercase tracking-wider">Welfare Intervention Protocol</p>
+                                    <p class="text-xs text-slate-300 mt-2 leading-relaxed">Recommended action: Initiate compassionate check-in, review upcoming duty roster, and provide 48-hour rest rotation.</p>
+                                </div>
+                                <button onclick="alert('Welfare intervention logged for ${record.id}. Officer assigned.')" class="w-full bg-teal-500 text-slate-950 font-semibold py-3 rounded-xl text-sm">
+                                    Initiate Timely Support Action
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            } else if (route === 'commander') {
+                container.innerHTML = `
+                <div class="min-h-[80vh] text-slate-100 p-4 sm:p-8 max-w-7xl mx-auto space-y-8">
+                    <div class="flex justify-between items-center pb-4 border-b border-white/10">
+                        <div>
+                            <span class="text-xs font-mono text-indigo-400">COMMANDER RESILIENCE VIEW</span>
+                            <h1 class="text-2xl font-bold text-white">Aggregated Unit Welfare & DutyFair Preview</h1>
+                        </div>
+                        <span class="text-xs font-mono px-3 py-1 rounded bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">ANONYMIZED TELEMETRY</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-[#0A1128] border border-white/10 rounded-2xl p-6 space-y-4">
+                            <div class="flex justify-between items-center"><h3 class="text-base font-bold text-white">Unit Alpha</h3><span class="text-xs font-mono px-2 py-0.5 rounded bg-white/5">248 Personnel</span></div>
+                            <div class="space-y-2 text-xs text-slate-300 border-t border-white/5 pt-3">
+                                <div class="flex justify-between"><span>Aggregated Risk Score:</span> <span class="font-mono text-white font-bold">78%</span></div>
+                                <div class="flex justify-between"><span>Workload Index:</span> <span class="font-mono text-rose-400">+18%</span></div>
+                            </div>
+                        </div>
+                        <div class="bg-[#0A1128] border border-white/10 rounded-2xl p-6 space-y-4">
+                            <div class="flex justify-between items-center"><h3 class="text-base font-bold text-white">Unit Bravo</h3><span class="text-xs font-mono px-2 py-0.5 rounded bg-white/5">210 Personnel</span></div>
+                            <div class="space-y-2 text-xs text-slate-300 border-t border-white/5 pt-3">
+                                <div class="flex justify-between"><span>Aggregated Risk Score:</span> <span class="font-mono text-white font-bold">54%</span></div>
+                                <div class="flex justify-between"><span>Workload Index:</span> <span class="font-mono text-amber-400">+8%</span></div>
+                            </div>
+                        </div>
+                        <div class="bg-[#0A1128] border border-white/10 rounded-2xl p-6 space-y-4">
+                            <div class="flex justify-between items-center"><h3 class="text-base font-bold text-white">Unit Charlie</h3><span class="text-xs font-mono px-2 py-0.5 rounded bg-white/5">195 Personnel</span></div>
+                            <div class="space-y-2 text-xs text-slate-300 border-t border-white/5 pt-3">
+                                <div class="flex justify-between"><span>Aggregated Risk Score:</span> <span class="font-mono text-white font-bold">24%</span></div>
+                                <div class="flex justify-between"><span>Workload Index:</span> <span class="font-mono text-teal-400">+1%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            } else if (route === 'admin') {
+                container.innerHTML = `
+                <div class="min-h-[80vh] text-slate-100 p-4 sm:p-8 max-w-5xl mx-auto space-y-6">
+                    <div class="flex justify-between items-center pb-4 border-b border-white/10">
+                        <div>
+                            <span class="text-xs font-mono text-teal-400">ADMINISTRATION & AUDIT LOG</span>
+                            <h1 class="text-2xl font-bold text-white">Role-Based Access Control & System Permissions</h1>
+                        </div>
+                        <button onclick="switchRoute('landing')" class="text-xs text-slate-400 hover:text-white">← Home</button>
+                    </div>
+                    <div class="bg-[#0A1128] border border-white/10 rounded-3xl p-6 space-y-6">
+                        <h3 class="text-sm font-bold text-white">Active Role Visibility Matrix</h3>
+                        <table class="w-full text-left text-xs">
+                            <thead class="border-b border-white/10 text-slate-400 font-mono">
+                                <tr><th class="pb-3">Role</th><th class="pb-3">Data Visibility</th><th class="pb-3">Status</th></tr>
+                            </thead>
+                            <tbody class="divide-y divide-white/5 text-slate-300">
+                                <tr><td class="py-3 font-bold text-white">Personnel</td><td class="py-3">Own personal wellness & check-ins only</td><td class="py-3"><span class="text-teal-400 font-mono">ACTIVE</span></td></tr>
+                                <tr><td class="py-3 font-bold text-white">Welfare Officer</td><td class="py-3">Authorized individual welfare risk data</td><td class="py-3"><span class="text-teal-400 font-mono">ACTIVE</span></td></tr>
+                                <tr><td class="py-3 font-bold text-white">Commander</td><td class="py-3">Aggregated & anonymized unit resilience</td><td class="py-3"><span class="text-teal-400 font-mono">ACTIVE</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>`;
+            } else if (route === 'login') {
+                container.innerHTML = `
+                <div class="min-h-[80vh] flex items-center justify-center p-4">
+                    <div class="max-w-md w-full bg-[#0A1128] border border-white/10 rounded-3xl p-8 shadow-2xl space-y-6">
+                        <div class="text-center space-y-2">
+                            <h2 class="text-xl font-bold text-white">AURA Access Portal</h2>
+                            <p class="text-xs text-slate-400">Select a demo role to explore the frontend prototype.</p>
+                        </div>
+                        <div class="space-y-3">
+                            <button onclick="switchRoute('personnel')" class="w-full bg-white/5 hover:bg-white/10 border border-white/10 p-3.5 rounded-xl text-left text-sm text-white">Personnel Portal</button>
+                            <button onclick="switchRoute('welfare')" class="w-full bg-white/5 hover:bg-white/10 border border-white/10 p-3.5 rounded-xl text-left text-sm text-white">Welfare Officer Dashboard</button>
+                            <button onclick="switchRoute('commander')" class="w-full bg-white/5 hover:bg-white/10 border border-white/10 p-3.5 rounded-xl text-left text-sm text-white">Commander View</button>
+                            <button onclick="switchRoute('admin')" class="w-full bg-white/5 hover:bg-white/10 border border-white/10 p-3.5 rounded-xl text-left text-sm text-white">Admin & Permissions</button>
+                        </div>
+                        <button onclick="switchRoute('landing')" class="w-full text-center text-xs text-slate-400 hover:text-white pt-2">← Back to Landing Page</button>
+                    </div>
+                </div>`;
+            }
+            
+            lucide.createIcons();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
