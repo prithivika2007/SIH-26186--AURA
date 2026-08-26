@@ -1,61 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personnel Portal • AURA</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="../css/global.css">
-    <link rel="stylesheet" href="../css/personnel.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personnel Portal | AURA</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<link rel="stylesheet" href="../css/global.css">
+<link rel="stylesheet" href="../css/personnel.css">
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen flex flex-col justify-between">
-    <header class="bg-white border-b border-slate-200 py-3 shadow-sm">
-        <div class="max-w-5xl mx-auto px-4 flex justify-between items-center">
-            <span class="text-xs font-mono text-teal-600 font-bold uppercase">PERSONNEL PORTAL • P-10482</span>
-            <a href="../landing.html" class="text-xs text-slate-500 hover:text-slate-900">Sign Out</a>
+<body class="bg-slate-50 text-slate-900 min-h-screen">
+
+<header class="border-b border-slate-200 py-4 px-6 flex items-center justify-between">
+    <p class="text-teal-600 font-bold text-sm tracking-wide">PERSONNEL PORTAL • P-10482</p>
+    <a href="../landing.html" class="text-sm text-slate-500 hover:text-teal-600">Sign Out</a>
+</header>
+
+<main class="max-w-5xl mx-auto px-6 py-10">
+    <div class="flex items-center justify-between mb-8">
+        <div>
+            <p class="text-teal-600 text-xs font-semibold tracking-wide">SECURE WELLNESS ACCESS</p>
+            <h1 class="text-3xl font-extrabold mt-1">Good evening, Arjun</h1>
         </div>
-    </header>
-    <main class="max-w-5xl mx-auto px-4 py-8 space-y-6 w-full flex-grow">
-        <div class="flex justify-between items-center pb-4 border-b border-slate-200">
-            <div>
-                <span class="text-xs font-mono text-teal-600">SECURE WELLNESS ACCESS</span>
-                <h1 class="text-2xl font-bold text-slate-900">Good evening, Arjun</h1>
+        <span class="text-xs font-semibold px-3 py-1.5 rounded-full border border-teal-300 text-teal-700">MODERATE STATUS</span>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl p-6 border border-slate-200">
+            <div class="flex items-center justify-between mb-4">
+                <p class="font-bold">Your Wellness</p>
+                <span class="text-sm text-teal-600 font-semibold">Stable</span>
             </div>
-            <span class="px-3 py-1 rounded-full bg-teal-50 text-teal-700 text-xs font-semibold border border-teal-200">MODERATE STATUS</span>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="card space-y-4">
-                <div class="flex justify-between items-center">
-                    <span class="text-xs text-slate-500">Your Wellness</span>
-                    <span class="text-xs font-mono text-teal-600 font-bold">Stable</span>
-                </div>
-                <div class="space-y-3 pt-2">
-                    <div>
-                        <div class="flex justify-between text-xs mb-1 text-slate-600"><span>Stress Level</span> <span class="font-mono text-teal-600 font-bold">62%</span></div>
-                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-teal-500 h-full rounded-full" style="width: 62%"></div></div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs mb-1 text-slate-600"><span>Fatigue Index</span> <span class="font-mono text-teal-600 font-bold">54%</span></div>
-                        <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden"><div class="bg-teal-500 h-full rounded-full" style="width: 54%"></div></div>
-                    </div>
-                </div>
+            <div class="flex items-center justify-center">
+                <canvas id="wellnessRing" width="180" height="180"></canvas>
             </div>
-            <div class="md:col-span-2 card space-y-4">
-                <h3 class="text-sm font-bold text-slate-900">Today's Recovery Recommendation</h3>
-                <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl text-xs text-slate-600 space-y-2">
-                    <p class="font-semibold text-teal-700">Scheduled Rest Window Suggested</p>
-                    <p>Based on rotational night duty frequency, take a 15-minute recovery activity and ensure proper hydration before evening shift.</p>
+            <div class="mt-4 space-y-3">
+                <div>
+                    <div class="flex justify-between text-sm mb-1"><span>Stress Level</span><span class="font-semibold">62%</span></div>
+                    <div class="w-full bg-slate-100 rounded-full h-2"><div class="bg-teal-500 h-2 rounded-full" style="width:62%"></div></div>
                 </div>
-                <button onclick="handleCheckin()" class="btn-primary text-xs">
-                    Complete Voluntary Check-in
-                </button>
+                <div>
+                    <div class="flex justify-between text-sm mb-1"><span>Fatigue Index</span><span class="font-semibold">54%</span></div>
+                    <div class="w-full bg-slate-100 rounded-full h-2"><div class="bg-teal-500 h-2 rounded-full" style="width:54%"></div></div>
+                </div>
             </div>
         </div>
-    </main>
-    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
-        <p>AURA Personnel Portal • Confidential & Secure</p>
-    </footer>
-    <script src="../js/app.js"></script>
+
+        <div class="bg-white rounded-2xl p-6 border border-slate-200">
+            <p class="font-bold mb-4">Today's Recovery Recommendation</p>
+            <div class="bg-teal-50 rounded-xl p-4 border border-teal-100">
+                <p class="font-semibold text-teal-800 mb-1">Scheduled Rest Window Suggested</p>
+                <p class="text-sm text-slate-600">Based on rotational night duty frequency, take a 15-minute recovery activity and ensure proper hydration before evening shift.</p>
+            </div>
+            <button class="w-full bg-teal-600 hover:bg-teal-700 text-white font-semibold py-3 rounded-full mt-6">Complete Voluntary Check-in</button>
+        </div>
+    </div>
+</main>
+
+<footer class="text-center text-xs text-slate-400 py-8">AURA Personnel Portal • Confidential &amp; Secure</footer>
+
+<script>
+lucide.createIcons();
+new Chart(document.getElementById('wellnessRing'), {
+    type: 'doughnut',
+    data: {
+        labels: ['Wellness', 'Remaining'],
+        datasets: [{ data: [58, 42], backgroundColor: ['#14b8a6', '#e2e8f0'], borderWidth: 0 }]
+    },
+    options: { cutout: '75%', plugins: { legend: { display: false }, tooltip: { enabled: false } } }
+});
+</script>
 </body>
 </html>
