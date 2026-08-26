@@ -1,144 +1,359 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Welfare Officer Dashboard | AURA</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
-<link rel="stylesheet" href="../css/global.css">
-<link rel="stylesheet" href="../css/welfare.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA • Welfare Officer Command Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(20, 184, 166, 0.15);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-panel:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(13, 148, 136, 0.15);
+            border-color: rgba(13, 148, 136, 0.4);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes growBar {
+            from { width: 0%; }
+        }
+
+        .animate-slide-up { animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-slide-left { animation: slideLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-slide-right { animation: slideRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-bar { animation: growBar 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-900 min-h-screen">
+<body class="bg-slate-100 text-slate-900 h-full flex flex-col">
 
-<header class="sticky top-0 z-50 bg-white border-b border-slate-200 py-3 px-6 flex items-center justify-between shadow-sm">
-    <div class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center">
-            <i data-lucide="shield" class="w-4 h-4 text-white"></i>
+    <!-- TOP COMMAND HEADER -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 px-6 py-4 flex items-center justify-between shadow-sm animate-slide-up">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-teal-600 flex items-center justify-center text-white shadow-md shadow-teal-600/20 hover:rotate-12 transition duration-300">
+                <i data-lucide="stethoscope" class="w-5 h-5"></i>
+            </div>
+            <div>
+                <h1 class="text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                    Welfare Officer Command Center 
+                    <span class="text-[10px] bg-teal-50 text-teal-700 font-bold px-2.5 py-0.5 rounded-full border border-teal-200 uppercase tracking-wider">Active Monitoring</span>
+                </h1>
+                <p class="text-xs text-slate-500 font-medium">CRPF Division II • Real-time Telemetry & Risk Mitigation</p>
+            </div>
         </div>
-        <div>
-            <span class="font-bold">AURA</span>
-            <p class="text-[11px] text-slate-500 -mt-0.5">Welfare Officer Command Center</p>
-        </div>
-    </div>
-    <a href="../landing.html" class="text-sm text-slate-500 hover:text-teal-600 flex items-center gap-1">
-        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Platform
-    </a>
-</header>
 
-<main class="max-w-7xl mx-auto px-6 py-8">
-    <h1 class="text-2xl font-extrabold">Welfare Officer Dashboard</h1>
-    <p class="text-slate-500 text-sm mt-1">CRPF Police Division II • Active Monitoring Enabled</p>
+        <div class="flex items-center gap-4">
+            <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                AI Core Online
+            </div>
+            <a href="../landing.html" class="text-xs font-semibold text-slate-600 hover:text-teal-600 transition flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200 px-3.5 py-2 rounded-xl">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Platform
+            </a>
+        </div>
+    </header>
 
-    <!-- STAT CARDS -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
-        <div class="bg-white rounded-2xl p-5 border border-slate-200">
-            <p class="text-slate-500 text-sm">Total Personnel</p>
-            <p class="text-3xl font-extrabold mt-1">1,248</p>
-        </div>
-        <div class="bg-white rounded-2xl p-5 border border-slate-200">
-            <p class="text-slate-500 text-sm">Watch</p>
-            <p class="text-3xl font-extrabold mt-1 text-amber-500">256</p>
-        </div>
-        <div class="bg-white rounded-2xl p-5 border border-slate-200">
-            <p class="text-slate-500 text-sm">Concern</p>
-            <p class="text-3xl font-extrabold mt-1 text-orange-500">173</p>
-        </div>
-        <div class="bg-white rounded-2xl p-5 border border-slate-200">
-            <p class="text-slate-500 text-sm">Urgent</p>
-            <p class="text-3xl font-extrabold mt-1 text-rose-600">28</p>
-        </div>
+    <!-- DYNAMIC CONTAINER -->
+    <main id="dashboard-container" class="flex-1 max-w-7xl w-full mx-auto p-6 space-y-6">
+        <!-- Default Dashboard View -->
+    </main>
+
+    <!-- INTERACTIVE NOTIFICATION TOAST -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white px-6 py-3.5 rounded-2xl shadow-2xl border border-teal-500/40 flex items-center gap-3 text-xs font-bold">
+        <i data-lucide="check-circle" class="w-5 h-5 text-teal-400"></i>
+        <span id="toast-msg">Action executed successfully.</span>
     </div>
 
-    <!-- CHARTS -->
-    <div class="grid md:grid-cols-3 gap-6 mt-6">
-        <div class="bg-white rounded-2xl p-5 border border-slate-200">
-            <p class="font-bold mb-3">Unit Risk Distribution</p>
-            <canvas id="riskDonut" height="180"></canvas>
-        </div>
-        <div class="bg-white rounded-2xl p-5 border border-slate-200 md:col-span-2">
-            <p class="font-bold mb-3">Unit Resilience Forecast</p>
-            <canvas id="resilienceLine" height="120"></canvas>
-        </div>
-    </div>
+    <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-400 mt-auto">
+        AURA Welfare Officer Command Center • Ministry of Home Affairs
+    </footer>
 
-    <!-- AT-RISK TABLE -->
-    <div class="bg-white rounded-2xl border border-slate-200 mt-6 overflow-hidden">
-        <p class="font-bold p-5 pb-0">Personnel Requiring Attention</p>
-        <table class="w-full text-sm mt-4">
-            <thead class="text-slate-500 text-left border-b border-slate-200">
-                <tr>
-                    <th class="px-5 py-2">Personnel ID</th>
-                    <th class="px-5 py-2">Unit</th>
-                    <th class="px-5 py-2">Risk Tier</th>
-                    <th class="px-5 py-2">Trajectory</th>
-                    <th class="px-5 py-2">Action</th>
-                </tr>
-            </thead>
-            <tbody id="riskTableBody">
-                <!-- rows injected by JS -->
-            </tbody>
-        </table>
-    </div>
-</main>
+    <script>
+        // Renders Main Dashboard View
+        function renderDashboard() {
+            const container = document.getElementById('dashboard-container');
+            container.innerHTML = `
+                <!-- TOP METRIC CARDS -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="glass-panel p-5 rounded-2xl border-l-4 border-l-slate-400 animate-slide-up" style="animation-delay: 0.1s;">
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Personnel</p>
+                        <div class="flex items-baseline justify-between mt-2">
+                            <h3 class="text-3xl font-black text-slate-900 counter" data-target="1248">0</h3>
+                            <span class="text-xs text-slate-500 font-semibold">Active Roster</span>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-5 rounded-2xl border-l-4 border-l-amber-400 animate-slide-up" style="animation-delay: 0.2s;">
+                        <p class="text-xs font-bold text-amber-600 uppercase tracking-wider">Watch Status</p>
+                        <div class="flex items-baseline justify-between mt-2">
+                            <h3 class="text-3xl font-black text-slate-900 counter" data-target="256">0</h3>
+                            <span class="text-xs text-amber-600 font-bold bg-amber-50 px-2 py-0.5 rounded">Requires Notice</span>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-5 rounded-2xl border-l-4 border-l-orange-500 animate-slide-up" style="animation-delay: 0.3s;">
+                        <p class="text-xs font-bold text-orange-600 uppercase tracking-wider">Concern Tier</p>
+                        <div class="flex items-baseline justify-between mt-2">
+                            <h3 class="text-3xl font-black text-slate-900 counter" data-target="173">0</h3>
+                            <span class="text-xs text-orange-600 font-bold bg-orange-50 px-2 py-0.5 rounded">Action Suggested</span>
+                        </div>
+                    </div>
+                    <div class="glass-panel p-5 rounded-2xl border-l-4 border-l-rose-500 animate-slide-up" style="animation-delay: 0.4s;">
+                        <p class="text-xs font-bold text-rose-600 uppercase tracking-wider">Urgent Intervention</p>
+                        <div class="flex items-baseline justify-between mt-2">
+                            <h3 class="text-3xl font-black text-slate-900 counter" data-target="28">0</h3>
+                            <span class="text-xs text-rose-600 font-bold bg-rose-50 px-2 py-0.5 rounded animate-pulse">Immediate Review</span>
+                        </div>
+                    </div>
+                </div>
 
-<script>
-lucide.createIcons();
+                <!-- AI INSIGHTS BANNER -->
+                <div class="bg-gradient-to-r from-teal-900 to-slate-900 text-white p-6 rounded-3xl shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-4 animate-slide-up" style="animation-delay: 0.5s;">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-teal-500/20 border border-teal-400/30 flex items-center justify-center text-teal-300 shrink-0">
+                            <i data-lucide="sparkles" class="w-6 h-6 animate-spin" style="animation-duration: 8s;"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono uppercase tracking-widest text-teal-300 bg-teal-500/20 px-2.5 py-0.5 rounded-full font-bold">AI Diagnostics Active</span>
+                            <h3 class="text-lg font-bold mt-1">Recovery decreasing across Alpha Battalion</h3>
+                            <p class="text-xs text-slate-300 mt-0.5">Night duty burden increasing by 18% over the last 7 days. Recommend rotating patrol shifts.</p>
+                        </div>
+                    </div>
+                    <button onclick="showToast('DutyFair AI Balancer executed successfully. Shifts reallocated.')" class="bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs px-5 py-3 rounded-xl transition shadow-md shrink-0 flex items-center gap-2 hover:scale-105 active:scale-95 cursor-pointer">
+                        <i data-lucide="sliders" class="w-4 h-4"></i> Run DutyFair Balancer
+                    </button>
+                </div>
 
-// Donut chart — Unit Risk Distribution
-new Chart(document.getElementById('riskDonut'), {
-    type: 'doughnut',
-    data: {
-        labels: ['Watch', 'Concern', 'Urgent'],
-        datasets: [{
-            data: [256, 173, 28],
-            backgroundColor: ['#14b8a6', '#f59e0b', '#e11d48'],
-            borderWidth: 0
-        }]
-    },
-    options: {
-        plugins: { legend: { position: 'bottom' } },
-        cutout: '65%'
-    }
-});
+                <!-- MAIN ANALYTICS GRID -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="glass-panel p-6 rounded-3xl animate-slide-left" style="animation-delay: 0.6s;">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-slate-900 text-base">Unit Risk Distribution</h3>
+                            <i data-lucide="pie-chart" class="w-5 h-5 text-teal-600"></i>
+                        </div>
+                        <div class="space-y-4 my-6">
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span class="text-slate-600">Stable / Optimal</span>
+                                    <span class="text-emerald-600">63% (789 Personnel)</span>
+                                </div>
+                                <div class="w-full bg-slate-200 h-3 rounded-full overflow-hidden">
+                                    <div class="bg-emerald-500 h-full rounded-full animate-bar" style="width: 63%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span class="text-slate-600">Watch List</span>
+                                    <span class="text-amber-600">20% (256 Personnel)</span>
+                                </div>
+                                <div class="w-full bg-slate-200 h-3 rounded-full overflow-hidden">
+                                    <div class="bg-amber-400 h-full rounded-full animate-bar" style="width: 20%; animation-delay: 0.2s;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span class="text-slate-600">Concern Tier</span>
+                                    <span class="text-orange-600">14% (173 Personnel)</span>
+                                </div>
+                                <div class="w-full bg-slate-200 h-3 rounded-full overflow-hidden">
+                                    <div class="bg-orange-500 h-full rounded-full animate-bar" style="width: 14%; animation-delay: 0.4s;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span class="text-slate-600">Urgent Cases</span>
+                                    <span class="text-rose-600">3% (28 Personnel)</span>
+                                </div>
+                                <div class="w-full bg-slate-200 h-3 rounded-full overflow-hidden">
+                                    <div class="bg-rose-500 h-full rounded-full animate-bar" style="width: 3%; animation-delay: 0.6s;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-slate-500">Aggregated from daily check-ins, duty rosters, and biometric sleep telemetry.</p>
+                    </div>
 
-// Line chart — Unit Resilience Forecast
-new Chart(document.getElementById('resilienceLine'), {
-    type: 'line',
-    data: {
-        labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
-        datasets: [
-            { label: 'Unit Alpha', data: [40, 45, 52, 58, 65, 70, 78], borderColor: '#e11d48', tension: 0.4 },
-            { label: 'Unit Bravo', data: [30, 32, 35, 38, 42, 48, 54], borderColor: '#f59e0b', tension: 0.4 },
-            { label: 'Unit Charlie', data: [20, 19, 21, 20, 22, 23, 24], borderColor: '#14b8a6', tension: 0.4 }
-        ]
-    },
-    options: {
-        plugins: { legend: { position: 'bottom' } },
-        scales: { y: { beginAtZero: true } }
-    }
-});
+                    <div class="glass-panel p-6 rounded-3xl lg:col-span-2 flex flex-col justify-between animate-slide-right" style="animation-delay: 0.6s;">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="font-bold text-slate-900 text-base">Unit Resilience 7-Day Trend</h3>
+                                <span class="text-xs bg-slate-200 text-slate-700 font-semibold px-2.5 py-1 rounded-lg">Real-time Model</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mb-6">Tracking recovery capacity and stress levels across battalions.</p>
+                        </div>
+                        <div class="bg-white p-4 rounded-2xl border border-slate-200 space-y-4 shadow-sm">
+                            <div class="flex items-center justify-between text-xs font-bold border-b border-slate-100 pb-3">
+                                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-teal-600"></span> Unit Alpha (Stable)</span>
+                                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-amber-500"></span> Unit Bravo (Watch)</span>
+                                <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-rose-500"></span> Unit Charlie (High Risk)</span>
+                            </div>
+                            <div class="h-36 flex items-end justify-between gap-2 pt-4 px-2">
+                                <div onclick="showToast('Day 1 Metrics: Unit Alpha optimal')" class="w-full bg-teal-50 rounded-t-lg h-[80%] hover:bg-teal-100 transition duration-300 relative group flex flex-col items-center justify-end cursor-pointer"><span class="text-[10px] font-bold text-teal-700 pb-1">Day 1</span></div>
+                                <div onclick="showToast('Day 2 Metrics: Normal operational tempo')" class="w-full bg-teal-100 rounded-t-lg h-[75%] hover:bg-teal-200 transition duration-300 relative group flex flex-col items-center justify-end cursor-pointer"><span class="text-[10px] font-bold text-teal-700 pb-1">Day 2</span></div>
+                                <div onclick="showToast('Day 3 Metrics: Minor fatigue spikes')" class="w-full bg-teal-200 rounded-t-lg h-[85%] hover:bg-teal-300 transition duration-300 relative group flex flex-col items-center justify-end cursor-pointer"><span class="text-[10px] font-bold text-teal-700 pb-1">Day 3</span></div>
+                                <div onclick="showToast('Day 4 Metrics: Shift rotation initiated')" class="w-full bg-teal-300 rounded-t-lg h-[70%] hover:bg-teal-400 transition duration-300 relative group flex flex-col items-center justify-end cursor-pointer"><span class="text-[10px] font-bold text-teal-900 pb-1">Day 4</span></div>
+                                <div onclick="showToast('Day 5 Metrics: Recovery index rising')" class="w-full bg-teal-500 rounded-t-lg h-[90%] hover:bg-teal-600 transition duration-300 relative group flex flex-col items-center justify-end cursor-pointer"><span class="text-[10px] font-bold text-white pb-1">Day 5</span></div>
+                                <div onclick="showToast('Day 6 Metrics: Optimal readiness')" class="w-full bg-teal-600 rounded-t-lg h-[95%] hover:bg-teal-700 transition duration-300 relative group flex flex-col items-center justify-end cursor-pointer"><span class="text-[10px] font-bold text-white pb-1">Day 6</span></div>
+                                <div onclick="showToast('Day 7 Metrics: Peak resilience score')" class="w-full bg-emerald-600 rounded-t-lg h-[98%] hover:bg-emerald-700 transition duration-300 relative group flex flex-col items-center justify-end cursor-pointer"><span class="text-[10px] font-bold text-white pb-1">Day 7</span></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mt-4 text-xs font-semibold text-slate-600">
+                            <span>Recommendation: Increase rest window for Unit Charlie by 2 hours.</span>
+                            <button onclick="showToast('Rest protocol successfully applied to Unit Charlie!')" class="text-teal-600 hover:underline font-bold flex items-center gap-1 cursor-pointer">Apply Protocol →</button>
+                        </div>
+                    </div>
+                </div>
 
-// At-risk personnel data
-const personnel = [
-    { id: 'P-10482', unit: 'Alpha Battalion - CRPF', tier: 'Elevated', tierColor: 'bg-rose-100 text-rose-700', trend: '↑ Deteriorating' },
-    { id: 'P-10491', unit: 'Bravo Company', tier: 'Moderate', tierColor: 'bg-amber-100 text-amber-700', trend: '→ Stable' },
-    { id: 'P-10321', unit: 'Alpha Battalion - CRPF', tier: 'Urgent', tierColor: 'bg-rose-100 text-rose-700', trend: '↑ High burden' },
-    { id: 'P-10376', unit: 'Alpha Battalion - CRPF', tier: 'Watch', tierColor: 'bg-teal-100 text-teal-700', trend: '→ Consecutive duty' }
-];
+                <!-- AT-RISK PERSONNEL TABLE -->
+                <div class="glass-panel p-6 rounded-3xl animate-slide-up" style="animation-delay: 0.8s;">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-base">Personnel Requiring Attention (Explainable AI Flags)</h3>
+                            <p class="text-xs text-slate-500">Individual risk triggers identified by multi-factor correlation analysis.</p>
+                        </div>
+                        <span class="text-xs bg-rose-50 text-rose-700 font-bold px-3 py-1.5 rounded-xl border border-rose-200 animate-pulse">28 Urgent Cases Pending</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr class="border-b border-slate-200 text-slate-400 font-mono uppercase tracking-wider">
+                                    <th class="py-3 px-4">Personnel ID</th>
+                                    <th class="py-3 px-4">Unit</th>
+                                    <th class="py-3 px-4">Risk Tier</th>
+                                    <th class="py-3 px-4">Explainable AI Reason</th>
+                                    <th class="py-3 px-4 text-right">Action Required</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
+                                <tr class="hover:bg-teal-50/50 transition duration-200">
+                                    <td class="py-3.5 px-4 font-bold text-slate-900">P-10482</td>
+                                    <td class="py-3.5 px-4">Alpha Battalion - CRPF</td>
+                                    <td class="py-3.5 px-4"><span class="bg-rose-100 text-rose-700 font-bold px-2.5 py-1 rounded-lg">Urgent</span></td>
+                                    <td class="py-3.5 px-4 text-slate-600">14 Consecutive Duty Days • Low Leave Utilization • Missed Check-ins</td>
+                                    <td class="py-3.5 px-4 text-right">
+                                        <button onclick="renderDetailView('P-10482', 'Alpha Battalion - CRPF', 'Urgent', '14 Consecutive Duty Days • Low Leave Utilization')" class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-3.5 py-1.5 rounded-lg transition hover:scale-105 active:scale-95 shadow-sm cursor-pointer">Inspect & Counsel</button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-teal-50/50 transition duration-200">
+                                    <td class="py-3.5 px-4 font-bold text-slate-900">P-10491</td>
+                                    <td class="py-3.5 px-4">Bravo Company</td>
+                                    <td class="py-3.5 px-4"><span class="bg-orange-100 text-orange-700 font-bold px-2.5 py-1 rounded-lg">Concern</span></td>
+                                    <td class="py-3.5 px-4 text-slate-600">High Night Shift Burden • Elevated Stress Indicators in Voice Log</td>
+                                    <td class="py-3.5 px-4 text-right">
+                                        <button onclick="renderDetailView('P-10491', 'Bravo Company', 'Concern', 'High Night Shift Burden • Elevated Voice Stress')" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold px-3.5 py-1.5 rounded-lg transition hover:scale-105 active:scale-95 cursor-pointer">Duty Adjustment</button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-teal-50/50 transition duration-200">
+                                    <td class="py-3.5 px-4 font-bold text-slate-900">P-10321</td>
+                                    <td class="py-3.5 px-4">Alpha Battalion - CRPF</td>
+                                    <td class="py-3.5 px-4"><span class="bg-amber-100 text-amber-700 font-bold px-2.5 py-1 rounded-lg">Watch</span></td>
+                                    <td class="py-3.5 px-4 text-slate-600">3 Consecutive Night Duties • Minor Sleep Deficit Reported</td>
+                                    <td class="py-3.5 px-4 text-right">
+                                        <button onclick="renderDetailView('P-10321', 'Alpha Battalion - CRPF', 'Watch', '3 Consecutive Night Duties • Sleep Deficit')" class="bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold px-3.5 py-1.5 rounded-lg transition hover:scale-105 active:scale-95 cursor-pointer">Monitor Recovery</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+            lucide.createIcons();
+            initCounters();
+        }
 
-const tbody = document.getElementById('riskTableBody');
-personnel.forEach(p => {
-    tbody.innerHTML += `
-        <tr class="border-b border-slate-100 last:border-0">
-            <td class="px-5 py-3 font-semibold">${p.id}</td>
-            <td class="px-5 py-3 text-slate-600">${p.unit}</td>
-            <td class="px-5 py-3"><span class="px-2 py-1 rounded-full text-xs font-semibold ${p.tierColor}">${p.tier}</span></td>
-            <td class="px-5 py-3 text-slate-500">${p.trend}</td>
-            <td class="px-5 py-3"><button class="text-teal-600 border border-teal-600 rounded-full px-3 py-1 text-xs font-semibold hover:bg-teal-50">Inspect</button></td>
-        </tr>`;
-});
-</script>
+        // Renders Detailed Drill-Down View when "Inspect" is clicked
+        function renderDetailView(id, unit, tier, reason) {
+            const container = document.getElementById('dashboard-container');
+            container.innerHTML = `
+                <div class="animate-slide-up space-y-6 max-w-4xl mx-auto">
+                    <button onclick="renderDashboard()" class="text-xs font-bold text-teal-600 hover:underline flex items-center gap-1.5 cursor-pointer bg-white px-4 py-2 rounded-xl shadow-sm border border-slate-200 w-fit">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Command Center
+                    </button>
+                    <div class="glass-panel p-8 rounded-3xl space-y-6 shadow-xl">
+                        <div class="flex justify-between items-center pb-4 border-b border-slate-200">
+                            <div>
+                                <span class="text-xs font-mono text-teal-600 uppercase tracking-wider font-bold">Individual Welfare Intelligence Record</span>
+                                <h1 class="text-3xl font-black text-slate-900 font-mono mt-1">Personnel ID: ${id}</h1>
+                                <p class="text-xs text-slate-500 font-medium">${unit}</p>
+                            </div>
+                            <span class="px-3.5 py-1.5 rounded-xl bg-rose-100 text-rose-700 font-bold text-xs uppercase">${tier} Risk Tier</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-4">
+                                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+                                    <p class="text-xs text-slate-400 uppercase font-mono font-bold">Explainable AI Risk Factors</p>
+                                    <ul class="space-y-2 text-xs text-slate-700 font-medium">
+                                        <li class="flex items-center gap-2"><i data-lucide="alert-triangle" class="w-4 h-4 text-amber-500"></i> ${reason}</li>
+                                        <li class="flex items-center gap-2"><i data-lucide="clock" class="w-4 h-4 text-teal-600"></i> Extended consecutive deployment duration</li>
+                                        <li class="flex items-center gap-2"><i data-lucide="moon" class="w-4 h-4 text-indigo-500"></i> Reduced physiological sleep recovery window</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="bg-teal-50 border border-teal-200 p-6 rounded-2xl flex flex-col justify-between space-y-4">
+                                <div>
+                                    <p class="text-xs font-bold text-teal-800 uppercase tracking-wider">Mandatory Intervention Protocol</p>
+                                    <p class="text-xs text-slate-600 mt-2 leading-relaxed">Recommended action: Initiate compassionate check-in, review upcoming duty roster, and assign 48-hour mandatory rest rotation.</p>
+                                </div>
+                                <button onclick="showToast('Intervention protocol logged and assigned for ${id}!'); renderDashboard();" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3.5 rounded-xl text-xs transition shadow-md cursor-pointer">
+                                    Execute Timely Support Action
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            lucide.createIcons();
+        }
+
+        // Toast Notification System
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3500);
+        }
+
+        // Counter Animation Helper
+        function initCounters() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                let count = 0;
+                const speed = target / 30;
+                const updateCount = () => {
+                    count += speed;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count);
+                        setTimeout(updateCount, 30);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        // Initial Load
+        document.addEventListener("DOMContentLoaded", () => {
+            renderDashboard();
+        });
+    </script>
 </body>
 </html>
