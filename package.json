@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Personnel Welfare Intelligence for SIH 26186",
   "scripts": {
-    "dev": "npx http-server -p 8000"
+    "dev": "npx http-server -p 8000 -o /index.html"
   },
   "devDependencies": {
     "http-server": "^14.1.1"

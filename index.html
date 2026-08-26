@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURA • Personnel Welfare Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #022c22;
+        }
+        @keyframes subtleZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        .hero-img {
+            animation: subtleZoom 4s ease-out forwards;
+        }
+        @keyframes floatAndFade {
+            0% { opacity: 0; transform: translateY(20px) scale(0.97); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .animate-entrance {
+            animation: floatAndFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 25px 50px -12px rgba(5, 150, 105, 0.4); }
+            50% { box-shadow: 0 25px 60px -10px rgba(20, 184, 166, 0.6); }
+        }
+        .card-glow {
+            animation: pulseGlow 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="relative flex items-center justify-center h-screen w-screen">
+
+    <!-- Visible Background Image with Rich Dark-Teal Gradient Overlay -->
+    <div style="position: absolute; inset: 0; z-index: 0; overflow: hidden;">
+        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1920&auto=format&fit=crop" 
+             alt="Happy Officers" 
+             class="hero-img"
+             style="width: 100%; height: 100%; object-fit: cover; opacity: 0.70;">
+        <div style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(2, 44, 34, 0.85) 0%, rgba(6, 78, 59, 0.75) 100%);"></div>
+    </div>
+
+    <!-- Gorgeous Gradient Card Box with Smooth Entrance & Glow Motion -->
+    <div class="animate-entrance card-glow" style="position: relative; z-index: 10; max-width: 34rem; width: 90%; margin: 0 auto; padding: 3rem 2.5rem; background: linear-gradient(135deg, #059669 0%, #0d9488 50%, #0f766e 100%); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 2rem; text-align: center; backdrop-blur: blur(12px);">
+        
+        <!-- Badge -->
+        <div style="margin-bottom: 1.75rem;">
+            <span style="font-size: 10px; font-family: monospace; letter-spacing: 0.25em; text-transform: uppercase; color: #ecfdf5; background: rgba(0, 0, 0, 0.2); padding: 0.4rem 1.25rem; border-radius: 9999px; font-weight: bold; border: 1px solid rgba(255, 255, 255, 0.2);">
+                SIH26186 • Ministry of Home Affairs
+            </span>
+        </div>
+
+        <!-- Title -->
+        <div style="margin-bottom: 1.75rem;">
+            <h1 style="font-size: 4rem; font-weight: 900; color: #ffffff; margin: 0; letter-spacing: -0.03em; text-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                AURA
+            </h1>
+            <p style="font-size: 0.8rem; font-weight: 700; color: #99f6e4; letter-spacing: 0.15em; text-transform: uppercase; margin-top: 0.5rem;">
+                Personnel Welfare & Operational Intelligence
+            </p>
+        </div>
+
+        <!-- Quote -->
+        <div style="border-top: 1px solid rgba(255, 255, 255, 0.25); padding-top: 1.5rem;">
+            <p style="font-size: 0.95rem; color: #f0fdf4; font-style: italic; font-weight: 500; margin: 0; letter-spacing: 0.01em;">
+                "We protect the nation. AURA protects us."
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Automatically transition to landing page after exactly 4 seconds
+        setTimeout(() => {
+            window.location.href = 'landing.html';
+        }, 4000);
+    </script>
+</body>
+</html>
